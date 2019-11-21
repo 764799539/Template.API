@@ -1,41 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Teamplate.Other
+namespace Teamplate.NuGet
 {
     [Serializable]
     public class PagingParam
     {
-        // Fields
-        private int _Page;
-        private int _PageSize;
-
-        // Methods
-        public PagingParam()
-        {
-            this._Page = 1;
-            this._PageSize = 10;
-        }
-
-        public PagingParam(int page, int pageSize)
-        {
-            this._Page = 1;
-            this._PageSize = 10;
-            this.Page = page;
-            this.PageSize = pageSize;
-        }
-
-        public PagedData ToPagedData() =>
-            new PagedData(this);
-
-        public PagedData<T> ToPagedData<T>() =>
-            new PagedData<T>(this);
-
-        // Properties
+        /// <summary>
+        /// 当前页
+        /// </summary>
         public int Page { get; set; }
 
+        /// <summary>
+        /// 每页数量
+        /// </summary>
         public int PageSize { get; set; }
+
+        public PagingParam(int page = 1, int pageSize = 10)
+        {
+            Page = page;
+            PageSize = pageSize;
+        }
+
+        public PagedData ToPagedData() => new PagedData(this);
+
+        public PagedData<T> ToPagedData<T>() => new PagedData<T>(this);
     }
 
 }

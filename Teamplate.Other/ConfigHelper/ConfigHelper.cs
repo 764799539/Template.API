@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
 
-namespace Teamplate.Other
+namespace Teamplate.NuGet
 {
     public static class ConfigHelper
     {

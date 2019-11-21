@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
-namespace Teamplate.Other
+namespace Teamplate.NuGet
 {
     public sealed class JwtToken
     {

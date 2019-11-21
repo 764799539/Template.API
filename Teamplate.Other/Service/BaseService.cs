@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Teamplate.Other
+namespace Teamplate.NuGet
 {
     public abstract class BaseService : IServiceFactoryProvider, IDisposable
     {

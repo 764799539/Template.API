@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Security.Claims;
 using System.Text;
 
-namespace Teamplate.Other
+namespace Teamplate.NuGet
 {
     public sealed class JwtTokenBuilder
     {

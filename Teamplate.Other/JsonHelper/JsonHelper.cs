@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace Teamplate.Other
+namespace Teamplate.NuGet
 {
     public static class JsonHelper
     {

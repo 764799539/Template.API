@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
 
-namespace Teamplate.Other
+namespace Teamplate.NuGet
 {
     public static class EnumHelper
     {

@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Template.ORM", "Template.OR
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Template.Common", "Template.Common\Template.Common.csproj", "{DF0B41D6-408A-4D7E-B11F-251131F4D02F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teamplate.Other", "Teamplate.Other\Teamplate.Other.csproj", "{9B35A06D-4173-4BE9-B3CD-3C741F9FFFC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Teamplate.NuGet", "Teamplate.Other\Teamplate.NuGet.csproj", "{9B35A06D-4173-4BE9-B3CD-3C741F9FFFC4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

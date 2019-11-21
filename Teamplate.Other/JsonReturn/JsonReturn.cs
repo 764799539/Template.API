@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Teamplate.Other
+namespace Teamplate.NuGet
 {
     [Serializable]
     public class JsonReturn
