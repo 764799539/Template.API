@@ -10,8 +10,11 @@ namespace Template.Model
     /// </summary>
     public enum UserStatusEnum
     {
+        [Description("正常")]
+        Normal = 0,
+        [Description("封禁")]
+        Ban = -90,
         [Description("删除")]
         Delete = -99,
-        
     }
 }

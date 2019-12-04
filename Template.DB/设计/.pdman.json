@@ -2,7 +2,7 @@
   "modules": [
     {
       "name": "Template",
-      "chnname": "用户模块",
+      "chnname": "模块",
       "entities": [
         {
           "title": "Sys_User",
@@ -11,7 +11,7 @@
               "name": "ID",
               "type": "ID",
               "remark": "",
-              "chnname": "SnowFlake主键ID",
+              "chnname": "主键ID",
               "pk": true,
               "notNull": true,
               "autoIncrement": false
@@ -84,9 +84,15 @@
             },
             {
               "name": "FaceImg",
-              "type": "ShortString",
+              "type": "SMString",
               "remark": "",
               "chnname": "头像"
+            },
+            {
+              "name": "SpecialType",
+              "type": "Integer",
+              "remark": "特殊用户类型(1系统管理帐号 2广告投放商帐号)",
+              "chnname": "特殊用户类型"
             },
             {
               "name": "Status",
@@ -181,13 +187,13 @@
           "chnname": "用户基本信息表"
         },
         {
-          "title": "Sys_User_Auth",
+          "title": "Sys_User_LoginAuth",
           "fields": [
             {
               "name": "ID",
               "type": "ID",
               "remark": "",
-              "chnname": "SnowFlake主键ID",
+              "chnname": "主键ID",
               "pk": true,
               "notNull": true,
               "autoIncrement": false
@@ -315,7 +321,7 @@
               "name": "ID",
               "type": "ID",
               "remark": "",
-              "chnname": "SnowFlake主键ID",
+              "chnname": "主键ID",
               "pk": true,
               "notNull": true,
               "autoIncrement": false
@@ -425,7 +431,7 @@
               "name": "ID",
               "type": "ID",
               "remark": "",
-              "chnname": "SnowFlake主键ID",
+              "chnname": "主键ID",
               "pk": true,
               "notNull": true,
               "autoIncrement": false
@@ -569,41 +575,1303 @@
             }
           ],
           "chnname": "用户位置信息表"
+        },
+        {
+          "title": "Sys_Special_User",
+          "fields": [
+            {
+              "name": "ID",
+              "type": "ID",
+              "remark": "",
+              "chnname": "主键ID",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": false
+            },
+            {
+              "name": "Type",
+              "type": "ID",
+              "remark": "类型(1系统管理帐号 2广告投放商帐号)",
+              "chnname": "类型"
+            },
+            {
+              "name": "UserName",
+              "type": "Name",
+              "remark": "",
+              "chnname": "用户名"
+            },
+            {
+              "name": "PassWord",
+              "type": "Name",
+              "remark": "",
+              "chnname": "密码"
+            },
+            {
+              "name": "Status",
+              "type": "Integer",
+              "remark": "状态(0正常)",
+              "chnname": "状态"
+            },
+            {
+              "name": "IsDelete",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "是否删除"
+            },
+            {
+              "name": "Revision",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "乐观锁"
+            },
+            {
+              "name": "CreateBy",
+              "type": "ID",
+              "remark": "",
+              "chnname": "创建人"
+            },
+            {
+              "name": "CreateDate",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "UpdateBy",
+              "type": "ID",
+              "remark": "",
+              "chnname": "更新人"
+            },
+            {
+              "name": "UpdateDate",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "废弃--特殊用户表"
+        },
+        {
+          "title": "Sys_Auth",
+          "fields": [
+            {
+              "name": "ID",
+              "type": "ID",
+              "remark": "",
+              "chnname": "主键ID",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": false
+            },
+            {
+              "name": "ParentID",
+              "type": "ID",
+              "remark": "",
+              "chnname": "父级ID"
+            },
+            {
+              "name": "Type",
+              "type": "Integer",
+              "remark": "类型(1菜单 2按钮/功能)",
+              "chnname": "类型"
+            },
+            {
+              "name": "Name",
+              "type": "Name",
+              "remark": "",
+              "chnname": "名称"
+            },
+            {
+              "name": "Describe",
+              "type": "SMString",
+              "remark": "",
+              "chnname": "描述"
+            },
+            {
+              "name": "Status",
+              "type": "Integer",
+              "remark": "状态(0正常)",
+              "chnname": "状态"
+            },
+            {
+              "name": "IsDelete",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "是否删除"
+            },
+            {
+              "name": "Revision",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "乐观锁"
+            },
+            {
+              "name": "CreateBy",
+              "type": "ID",
+              "remark": "",
+              "chnname": "创建人"
+            },
+            {
+              "name": "CreateDate",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "UpdateBy",
+              "type": "ID",
+              "remark": "",
+              "chnname": "更新人"
+            },
+            {
+              "name": "UpdateDate",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "权限表"
+        },
+        {
+          "title": "Sys_UserAuth",
+          "fields": [
+            {
+              "name": "ID",
+              "type": "ID",
+              "remark": "",
+              "chnname": "主键ID",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": false
+            },
+            {
+              "name": "UserID",
+              "type": "ID",
+              "remark": "",
+              "chnname": "用户ID"
+            },
+            {
+              "name": "AuthID",
+              "type": "ID",
+              "remark": "",
+              "chnname": "权限ID"
+            },
+            {
+              "name": "Status",
+              "type": "Integer",
+              "remark": "状态(0正常)",
+              "chnname": "状态"
+            },
+            {
+              "name": "IsDelete",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "是否删除"
+            },
+            {
+              "name": "Revision",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "乐观锁"
+            },
+            {
+              "name": "CreateBy",
+              "type": "ID",
+              "remark": "",
+              "chnname": "创建人"
+            },
+            {
+              "name": "CreateDate",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "UpdateBy",
+              "type": "ID",
+              "remark": "",
+              "chnname": "更新人"
+            },
+            {
+              "name": "UpdateDate",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "用户权限关系表"
+        },
+        {
+          "title": "Sys_Role",
+          "fields": [
+            {
+              "name": "ID",
+              "type": "ID",
+              "remark": "",
+              "chnname": "主键ID",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": false
+            },
+            {
+              "name": "ParentID",
+              "type": "ID",
+              "remark": "",
+              "chnname": "父级ID"
+            },
+            {
+              "name": "Name",
+              "type": "Name",
+              "remark": "",
+              "chnname": "名称"
+            },
+            {
+              "name": "Describe",
+              "type": "SMString",
+              "remark": "",
+              "chnname": "描述"
+            },
+            {
+              "name": "Status",
+              "type": "Integer",
+              "remark": "状态(0正常)",
+              "chnname": "状态"
+            },
+            {
+              "name": "IsDelete",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "是否删除"
+            },
+            {
+              "name": "Revision",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "乐观锁"
+            },
+            {
+              "name": "CreateBy",
+              "type": "ID",
+              "remark": "",
+              "chnname": "创建人"
+            },
+            {
+              "name": "CreateDate",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "UpdateBy",
+              "type": "ID",
+              "remark": "",
+              "chnname": "更新人"
+            },
+            {
+              "name": "UpdateDate",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "角色表"
+        },
+        {
+          "title": "Sys_UserRole",
+          "fields": [
+            {
+              "name": "ID",
+              "type": "ID",
+              "remark": "",
+              "chnname": "主键ID",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": false
+            },
+            {
+              "name": "UserID",
+              "type": "ID",
+              "remark": "",
+              "chnname": "用户ID"
+            },
+            {
+              "name": "RoleID",
+              "type": "ID",
+              "remark": "",
+              "chnname": "角色ID"
+            },
+            {
+              "name": "Status",
+              "type": "Integer",
+              "remark": "状态(0正常)",
+              "chnname": "状态"
+            },
+            {
+              "name": "IsDelete",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "是否删除"
+            },
+            {
+              "name": "Revision",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "乐观锁"
+            },
+            {
+              "name": "CreateBy",
+              "type": "UserID",
+              "remark": "",
+              "chnname": "创建人"
+            },
+            {
+              "name": "CreateDate",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "UpdateBy",
+              "type": "UserID",
+              "remark": "",
+              "chnname": "更新人"
+            },
+            {
+              "name": "UpdateDate",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "用户角色关系表"
+        },
+        {
+          "title": "Sys_RoleAuth",
+          "fields": [
+            {
+              "name": "ID",
+              "type": "ID",
+              "remark": "",
+              "chnname": "主键ID",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": false
+            },
+            {
+              "name": "RoleID",
+              "type": "ID",
+              "remark": "",
+              "chnname": "角色ID"
+            },
+            {
+              "name": "AuthID",
+              "type": "ID",
+              "remark": "",
+              "chnname": "权限ID"
+            },
+            {
+              "name": "Status",
+              "type": "Integer",
+              "remark": "状态(0正常)",
+              "chnname": "状态"
+            },
+            {
+              "name": "IsDelete",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "是否删除"
+            },
+            {
+              "name": "Revision",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "乐观锁"
+            },
+            {
+              "name": "CreateBy",
+              "type": "UserID",
+              "remark": "",
+              "chnname": "创建人"
+            },
+            {
+              "name": "CreateDate",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "UpdateBy",
+              "type": "UserID",
+              "remark": "",
+              "chnname": "更新人"
+            },
+            {
+              "name": "UpdateDate",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "角色权限关系表"
+        },
+        {
+          "title": "Sys_Group",
+          "fields": [
+            {
+              "name": "ID",
+              "type": "ID",
+              "remark": "",
+              "chnname": "主键ID",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": false
+            },
+            {
+              "name": "ParentID",
+              "type": "ID",
+              "remark": "",
+              "chnname": "父级ID"
+            },
+            {
+              "name": "Name",
+              "type": "Name",
+              "remark": "",
+              "chnname": "名称"
+            },
+            {
+              "name": "Describe",
+              "type": "SMString",
+              "remark": "",
+              "chnname": "描述"
+            },
+            {
+              "name": "Status",
+              "type": "Integer",
+              "remark": "状态(0正常)",
+              "chnname": "状态"
+            },
+            {
+              "name": "IsDelete",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "是否删除"
+            },
+            {
+              "name": "Revision",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "乐观锁"
+            },
+            {
+              "name": "CreateBy",
+              "type": "UserID",
+              "remark": "",
+              "chnname": "创建人"
+            },
+            {
+              "name": "CreateDate",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "UpdateBy",
+              "type": "UserID",
+              "remark": "",
+              "chnname": "更新人"
+            },
+            {
+              "name": "UpdateDate",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "组表"
+        },
+        {
+          "title": "Sys_UserGroup",
+          "fields": [
+            {
+              "name": "ID",
+              "type": "ID",
+              "remark": "",
+              "chnname": "主键ID",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": false
+            },
+            {
+              "name": "UserID",
+              "type": "ID",
+              "remark": "",
+              "chnname": "用户ID"
+            },
+            {
+              "name": "GroupID",
+              "type": "ID",
+              "remark": "",
+              "chnname": "组ID"
+            },
+            {
+              "name": "Status",
+              "type": "Integer",
+              "remark": "状态(0正常)",
+              "chnname": "状态"
+            },
+            {
+              "name": "IsDelete",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "是否删除"
+            },
+            {
+              "name": "Revision",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "乐观锁"
+            },
+            {
+              "name": "CreateBy",
+              "type": "ID",
+              "remark": "",
+              "chnname": "创建人"
+            },
+            {
+              "name": "CreateDate",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "UpdateBy",
+              "type": "ID",
+              "remark": "",
+              "chnname": "更新人"
+            },
+            {
+              "name": "UpdateDate",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "用户组关系表"
+        },
+        {
+          "title": "Sys_RoleGroup",
+          "fields": [
+            {
+              "name": "ID",
+              "type": "ID",
+              "remark": "",
+              "chnname": "主键ID",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": false
+            },
+            {
+              "name": "RoleID",
+              "type": "ID",
+              "remark": "",
+              "chnname": "角色ID"
+            },
+            {
+              "name": "GroupID",
+              "type": "ID",
+              "remark": "",
+              "chnname": "组ID"
+            },
+            {
+              "name": "Status",
+              "type": "Integer",
+              "remark": "状态(0正常)",
+              "chnname": "状态"
+            },
+            {
+              "name": "IsDelete",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "是否删除"
+            },
+            {
+              "name": "Revision",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "乐观锁"
+            },
+            {
+              "name": "CreateBy",
+              "type": "ID",
+              "remark": "",
+              "chnname": "创建人"
+            },
+            {
+              "name": "CreateDate",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "UpdateBy",
+              "type": "ID",
+              "remark": "",
+              "chnname": "更新人"
+            },
+            {
+              "name": "UpdateDate",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "角色组关系表"
+        },
+        {
+          "title": "Sys_GroupAuth",
+          "fields": [
+            {
+              "name": "ID",
+              "type": "ID",
+              "remark": "",
+              "chnname": "主键ID",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": false
+            },
+            {
+              "name": "GroupID",
+              "type": "ID",
+              "remark": "",
+              "chnname": "组ID"
+            },
+            {
+              "name": "AuthID",
+              "type": "ID",
+              "remark": "",
+              "chnname": "权限ID"
+            },
+            {
+              "name": "Status",
+              "type": "Integer",
+              "remark": "状态(0正常)",
+              "chnname": "状态"
+            },
+            {
+              "name": "IsDelete",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "是否删除"
+            },
+            {
+              "name": "Revision",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "乐观锁"
+            },
+            {
+              "name": "CreateBy",
+              "type": "ID",
+              "remark": "",
+              "chnname": "创建人"
+            },
+            {
+              "name": "CreateDate",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "UpdateBy",
+              "type": "ID",
+              "remark": "",
+              "chnname": "更新人"
+            },
+            {
+              "name": "UpdateDate",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "组权限关系表"
         }
       ],
       "graphCanvas": {
         "nodes": [
           {
             "shape": "table",
-            "title": "Sys_User_Extra",
-            "moduleName": false,
-            "x": 170,
-            "y": 330,
-            "id": "66643fa2"
-          },
-          {
-            "shape": "table",
-            "title": "Sys_User_Auth",
-            "moduleName": false,
-            "x": 180,
-            "y": 620,
-            "id": "257a5064"
-          },
-          {
-            "shape": "table",
             "title": "Sys_User",
             "moduleName": false,
-            "x": 600,
-            "y": 580,
+            "x": 1720,
+            "y": 530,
             "id": "af693613"
           },
           {
             "shape": "table",
             "title": "Sys_User_Location",
             "moduleName": false,
-            "x": 1050,
-            "y": 530,
+            "x": 2080,
+            "y": 660,
             "id": "038aa1fb"
+          },
+          {
+            "shape": "table",
+            "title": "Sys_User_LoginAuth",
+            "moduleName": false,
+            "x": 1380,
+            "y": 860,
+            "id": "257a5064"
+          },
+          {
+            "shape": "table",
+            "title": "Sys_User_Extra",
+            "moduleName": false,
+            "x": 1380,
+            "y": 600,
+            "id": "66643fa2"
+          },
+          {
+            "shape": "table",
+            "title": "Sys_UserRole",
+            "moduleName": false,
+            "x": 2080,
+            "y": 300,
+            "id": "d1fd775d"
+          },
+          {
+            "shape": "table",
+            "title": "Sys_UserAuth",
+            "moduleName": false,
+            "x": 1380,
+            "y": 330,
+            "id": "87458d5b"
+          },
+          {
+            "shape": "table",
+            "title": "Sys_Group",
+            "moduleName": false,
+            "x": 1710,
+            "y": -250,
+            "id": "a5280e59"
+          },
+          {
+            "shape": "table",
+            "title": "Sys_UserGroup",
+            "moduleName": false,
+            "x": 1710,
+            "y": 60,
+            "id": "b94b3df0"
+          },
+          {
+            "shape": "table",
+            "title": "Sys_Role",
+            "moduleName": false,
+            "x": 2670,
+            "y": 20,
+            "id": "1d1b4dfe"
+          },
+          {
+            "shape": "table",
+            "title": "Sys_RoleGroup",
+            "moduleName": false,
+            "x": 2080,
+            "y": -10,
+            "id": "4ced1583"
+          },
+          {
+            "shape": "table",
+            "title": "Sys_GroupAuth",
+            "moduleName": false,
+            "x": 1280,
+            "y": -10,
+            "id": "8b0ce84c"
+          },
+          {
+            "shape": "table",
+            "title": "Sys_Auth",
+            "moduleName": false,
+            "x": 820,
+            "y": 90,
+            "id": "c3518bdf"
+          },
+          {
+            "shape": "table",
+            "title": "Sys_RoleAuth",
+            "moduleName": false,
+            "x": 1720,
+            "y": -540,
+            "id": "185d7bed"
           }
         ],
         "edges": [
@@ -615,12 +1883,12 @@
             "id": "9ac652bb",
             "controlPoints": [
               {
-                "x": 318.7138671875,
-                "y": 282.2738095238095
+                "x": 1504.783203125,
+                "y": 552.2738095238095
               },
               {
-                "x": 441.955078125,
-                "y": 402.08720930232556
+                "x": 1571.8876953125,
+                "y": 342.0833333333333
               }
             ],
             "sourceAnchor": 3,
@@ -634,12 +1902,12 @@
             "id": "e536e3d2",
             "controlPoints": [
               {
-                "x": 328.7138671875,
-                "y": 542.2129629629629
+                "x": 1510.783203125,
+                "y": 782.2129629629629
               },
               {
-                "x": 441.955078125,
-                "y": 402.08720930232556
+                "x": 1571.8876953125,
+                "y": 342.0833333333333
               }
             ],
             "sourceAnchor": 3,
@@ -653,16 +1921,252 @@
             "id": "6e3c4fc5",
             "controlPoints": [
               {
-                "x": 899.2880859375,
-                "y": 412.1642857142857
+                "x": 1953.21875,
+                "y": 542.1642857142857
               },
               {
-                "x": 758.044921875,
-                "y": 422.1337209302326
+                "x": 1868.1123046875,
+                "y": 362.1277777777778
               }
             ],
             "sourceAnchor": 2,
             "targetAnchor": 3
+          },
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "87458d5b",
+            "target": "c3518bdf",
+            "id": "b5b6fc4e",
+            "controlPoints": [
+              {
+                "x": 1255.216796875,
+                "y": 292.3369565217391
+              },
+              {
+                "x": 946.78125,
+                "y": -7.861111111111107
+              }
+            ],
+            "sourceAnchor": 4,
+            "targetAnchor": 1
+          },
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "87458d5b",
+            "target": "af693613",
+            "id": "60625766",
+            "controlPoints": [
+              {
+                "x": 1504.783203125,
+                "y": 272.25
+              },
+              {
+                "x": 1571.8876953125,
+                "y": 342.0833333333333
+              }
+            ],
+            "sourceAnchor": 3,
+            "targetAnchor": 0
+          },
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "d1fd775d",
+            "target": "af693613",
+            "id": "2236192b",
+            "controlPoints": [
+              {
+                "x": 1955.216796875,
+                "y": 242.25
+              },
+              {
+                "x": 1868.1123046875,
+                "y": 342.0833333333333
+              }
+            ],
+            "sourceAnchor": 2,
+            "targetAnchor": 1
+          },
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "d1fd775d",
+            "target": "1d1b4dfe",
+            "id": "73215b90",
+            "controlPoints": [
+              {
+                "x": 2204.783203125,
+                "y": 262.3369565217391
+              },
+              {
+                "x": 2543.21875,
+                "y": -67.85
+              }
+            ],
+            "sourceAnchor": 5,
+            "targetAnchor": 0
+          },
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "185d7bed",
+            "target": "1d1b4dfe",
+            "id": "9305b10c",
+            "controlPoints": [
+              {
+                "x": 1844.783203125,
+                "y": -597.75
+              },
+              {
+                "x": 2543.21875,
+                "y": -67.85
+              }
+            ],
+            "sourceAnchor": 3,
+            "targetAnchor": 0
+          },
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "185d7bed",
+            "target": "c3518bdf",
+            "id": "0660e022",
+            "controlPoints": [
+              {
+                "x": 1595.216796875,
+                "y": -577.6630434782609
+              },
+              {
+                "x": 946.78125,
+                "y": -7.861111111111107
+              }
+            ],
+            "sourceAnchor": 4,
+            "targetAnchor": 1
+          },
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "b94b3df0",
+            "target": "af693613",
+            "id": "0a422790",
+            "controlPoints": [
+              {
+                "x": 1834.783203125,
+                "y": 2.25
+              },
+              {
+                "x": 1920,
+                "y": 160
+              },
+              {
+                "x": 1868.1123046875,
+                "y": 342.0833333333333
+              }
+            ],
+            "sourceAnchor": 3,
+            "targetAnchor": 1
+          },
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "b94b3df0",
+            "target": "a5280e59",
+            "id": "eb9a1c28",
+            "controlPoints": [
+              {
+                "x": 1585.216796875,
+                "y": 22.336956521739125
+              },
+              {
+                "x": 1510,
+                "y": -140
+              },
+              {
+                "x": 1583.21875,
+                "y": -337.85
+              }
+            ],
+            "sourceAnchor": 4,
+            "targetAnchor": 0
+          },
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "4ced1583",
+            "target": "1d1b4dfe",
+            "id": "02badda5",
+            "controlPoints": [
+              {
+                "x": 2204.783203125,
+                "y": -67.75
+              },
+              {
+                "x": 2543.21875,
+                "y": -67.85
+              }
+            ],
+            "sourceAnchor": 3,
+            "targetAnchor": 0
+          },
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "4ced1583",
+            "target": "a5280e59",
+            "id": "ceb2ac84",
+            "controlPoints": [
+              {
+                "x": 1955.216796875,
+                "y": -47.663043478260875
+              },
+              {
+                "x": 1836.78125,
+                "y": -337.85
+              }
+            ],
+            "sourceAnchor": 4,
+            "targetAnchor": 1
+          },
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "8b0ce84c",
+            "target": "a5280e59",
+            "id": "a00c265a",
+            "controlPoints": [
+              {
+                "x": 1404.783203125,
+                "y": -67.75
+              },
+              {
+                "x": 1583.21875,
+                "y": -337.85
+              }
+            ],
+            "sourceAnchor": 3,
+            "targetAnchor": 0
+          },
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "8b0ce84c",
+            "target": "c3518bdf",
+            "id": "b05c7cd3",
+            "controlPoints": [
+              {
+                "x": 1155.216796875,
+                "y": -47.663043478260875
+              },
+              {
+                "x": 946.78125,
+                "y": -7.861111111111107
+              }
+            ],
+            "sourceAnchor": 4,
+            "targetAnchor": 1
           }
         ]
       },
@@ -681,7 +2185,7 @@
         {
           "relation": "0,n:1",
           "from": {
-            "entity": "Sys_User_Auth",
+            "entity": "Sys_User_LoginAuth",
             "field": "UserID"
           },
           "to": {
@@ -699,6 +2203,138 @@
             "entity": "Sys_User",
             "field": "UserCode"
           }
+        },
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "Sys_UserAuth",
+            "field": "AuthID"
+          },
+          "to": {
+            "entity": "Sys_Auth",
+            "field": "ID"
+          }
+        },
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "Sys_UserAuth",
+            "field": "UserID"
+          },
+          "to": {
+            "entity": "Sys_User",
+            "field": "ID"
+          }
+        },
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "Sys_UserRole",
+            "field": "UserID"
+          },
+          "to": {
+            "entity": "Sys_User",
+            "field": "ID"
+          }
+        },
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "Sys_UserRole",
+            "field": "RoleID"
+          },
+          "to": {
+            "entity": "Sys_Role",
+            "field": "ID"
+          }
+        },
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "Sys_RoleAuth",
+            "field": "RoleID"
+          },
+          "to": {
+            "entity": "Sys_Role",
+            "field": "ID"
+          }
+        },
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "Sys_RoleAuth",
+            "field": "AuthID"
+          },
+          "to": {
+            "entity": "Sys_Auth",
+            "field": "ID"
+          }
+        },
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "Sys_UserGroup",
+            "field": "UserID"
+          },
+          "to": {
+            "entity": "Sys_User",
+            "field": "ID"
+          }
+        },
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "Sys_UserGroup",
+            "field": "GroupID"
+          },
+          "to": {
+            "entity": "Sys_Group",
+            "field": "ID"
+          }
+        },
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "Sys_RoleGroup",
+            "field": "RoleID"
+          },
+          "to": {
+            "entity": "Sys_Role",
+            "field": "ID"
+          }
+        },
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "Sys_RoleGroup",
+            "field": "GroupID"
+          },
+          "to": {
+            "entity": "Sys_Group",
+            "field": "ID"
+          }
+        },
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "Sys_GroupAuth",
+            "field": "GroupID"
+          },
+          "to": {
+            "entity": "Sys_Group",
+            "field": "ID"
+          }
+        },
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "Sys_GroupAuth",
+            "field": "AuthID"
+          },
+          "to": {
+            "entity": "Sys_Auth",
+            "field": "ID"
+          }
         }
       ]
     }
@@ -710,7 +2346,7 @@
         "code": "ID",
         "apply": {
           "SQLServer": {
-            "type": "NVARCHAR(100)"
+            "type": "BIGINT"
           }
         }
       },
@@ -1146,7 +2782,7 @@
         "name": "ID",
         "type": "ID",
         "remark": "",
-        "chnname": "自增主键ID",
+        "chnname": "主键ID",
         "pk": true,
         "notNull": true,
         "autoIncrement": false
