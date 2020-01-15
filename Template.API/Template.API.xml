@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Template.API</name>
+    </assembly>
+    <members>
+        <member name="T:Template.API.Controllers.BaseController">
+            <summary>
+            自定义控制器基类
+            </summary>
+        </member>
+        <member name="M:Template.API.Controllers.BaseController.Dispose(System.Boolean)">
+            <summary>
+            Dispose
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="M:Template.API.Controllers.BaseController.DisposeMembers">
+            <summary>
+            扫描对象内所有带有 DisposableAttribute 标记并实现了 IDisposable 接口的属性和字段，执行其 Dispose() 方法
+            </summary>
+        </member>
+        <member name="T:Template.API.Controllers.TestController">
+            <summary>
+            测试控制器
+            </summary>
+        </member>
+        <member name="M:Template.API.Controllers.TestController.GetTestContent(System.String)">
+            <summary>
+            测试借口
+            </summary>
+            <param name="text"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Template.API.Controllers.WeatherForecastController">
+            <summary>
+            演示控制器
+            </summary>
+        </member>
+        <member name="M:Template.API.Controllers.WeatherForecastController.#ctor(Microsoft.Extensions.Logging.ILogger{Template.API.Controllers.WeatherForecastController})">
+            <summary>
+            WeatherForecastController
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="M:Template.API.Controllers.WeatherForecastController.Get">
+            <summary>
+            演示接口
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Template.API.Program">
+            <summary>
+            Program类
+            </summary>
+        </member>
+        <member name="M:Template.API.Program.Main(System.String[])">
+            <summary>
+            Main方法
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:Template.API.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            CreateHostBuilder
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Template.API.Startup">
+            <summary>
+            Startup
+            </summary>
+        </member>
+        <member name="M:Template.API.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Startup
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:Template.API.Startup.Configuration">
+            <summary>
+            Configuration
+            </summary>
+        </member>
+        <member name="M:Template.API.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            此方法由运行时调用，此方法将服务注入到容器，注入体现的是一个IOC（控制反转的的思想）
+            </summary>
+            <param name="services">依赖注入容器</param>
+        </member>
+        <member name="M:Template.API.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            This method gets called by the runtime. Use this method to configure the HTTP request pipeline
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+        </member>
+        <member name="T:Template.API.WeatherForecast">
+            <summary>
+            演示类
+            </summary>
+        </member>
+        <member name="P:Template.API.WeatherForecast.Date">
+            <summary>
+            Date
+            </summary>
+        </member>
+        <member name="P:Template.API.WeatherForecast.TemperatureC">
+            <summary>
+            TemperatureC
+            </summary>
+        </member>
+        <member name="P:Template.API.WeatherForecast.TemperatureF">
+            <summary>
+            TemperatureF
+            </summary>
+        </member>
+        <member name="P:Template.API.WeatherForecast.Summary">
+            <summary>
+            Summary
+            </summary>
+        </member>
+    </members>
+</doc>

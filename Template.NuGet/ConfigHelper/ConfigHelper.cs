@@ -5,7 +5,13 @@ namespace Template.NuGet
 {
     public static class ConfigHelper
     {
-        // Methods
+        public static IConfiguration Configuration { get; set; }
+
+        /// <summary>
+        /// 获取配置内容
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public static string GetAppConfig(string key)
         {
             string str;
@@ -19,9 +25,6 @@ namespace Template.NuGet
             }
             return str;
         }
-
-        // Properties
-        public static IConfiguration Configuration { get; set; }
     }
 
 

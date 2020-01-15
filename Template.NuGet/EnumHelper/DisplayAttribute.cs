@@ -6,16 +6,14 @@ namespace Template.NuGet
 {
     public class DisplayAttribute : Attribute
     {
-        // Fields
+        public bool Display { get; set; }
+
         private bool display;
 
-        // Methods
         public DisplayAttribute(bool display)
         {
             this.display = display;
         }
-
-        // Properties
-        public bool Display { get; set; }
+        
     }
 }

@@ -7,6 +7,9 @@ using System.Text;
 
 namespace Template.NuGet
 {
+    /// <summary>
+    /// 服务注册类
+    /// </summary>
     public static class ServiceRegistry
     {
         // Methods

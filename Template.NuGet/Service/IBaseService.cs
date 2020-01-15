@@ -6,7 +6,6 @@ namespace Template.NuGet
 {
     public interface IBaseService : IDisposable
     {
-        // Properties
         IServiceFactory ServiceFactory { get; set; }
     }
 }

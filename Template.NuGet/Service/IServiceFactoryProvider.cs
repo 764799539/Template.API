@@ -6,7 +6,6 @@ namespace Template.NuGet
 {
     public interface IServiceFactoryProvider
     {
-        // Properties
         IServiceFactory ServiceFactory { get; set; }
     }
 }

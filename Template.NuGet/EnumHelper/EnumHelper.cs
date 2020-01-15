@@ -7,7 +7,6 @@ namespace Template.NuGet
 {
     public static class EnumHelper
     {
-        // Fields
         private static Dictionary<Type, Dictionary<object, string>> s_Cache = new Dictionary<Type, Dictionary<object, string>>();
         private static object s_SyncObj = new object();
 
