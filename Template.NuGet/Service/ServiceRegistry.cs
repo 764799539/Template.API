@@ -12,7 +12,6 @@ namespace Template.NuGet
     /// </summary>
     public static class ServiceRegistry
     {
-        // Methods
         private static void RegisterAppServices(IServiceCollection services, List<Type> implementationTypes)
         {
             Type appServiceType = typeof(IBaseService);
@@ -22,11 +21,24 @@ namespace Template.NuGet
                 {
                     if (typeof(IDisposable).IsAssignableFrom(type))
                     {
-                        ServiceCollectionServiceExtensions.AddScoped(services, type2, type);
+                        try
+                        {
+                            ServiceCollectionServiceExtensions.AddScoped(services, type2, type);
+                        }
+                        catch (Exception)
+                        {
+                        }
+                        
                     }
                     else
                     {
-                        ServiceCollectionServiceExtensions.AddTransient(services, type2, type);
+                        try
+                        {
+                            ServiceCollectionServiceExtensions.AddTransient(services, type2, type);
+                        }
+                        catch (Exception)
+                        {
+                        }
                     }
                 }
             }

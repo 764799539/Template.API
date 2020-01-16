@@ -9,21 +9,33 @@
             自定义控制器基类
             </summary>
         </member>
-        <member name="M:Template.API.Controllers.BaseController.Dispose(System.Boolean)">
+        <member name="M:Template.API.Controllers.BaseController.Dispose">
             <summary>
             Dispose
             </summary>
-            <param name="disposing"></param>
         </member>
         <member name="M:Template.API.Controllers.BaseController.DisposeMembers">
             <summary>
             扫描对象内所有带有 DisposableAttribute 标记并实现了 IDisposable 接口的属性和字段，执行其 Dispose() 方法
             </summary>
         </member>
+        <member name="M:Template.API.Controllers.BaseController.GetService``1">
+            <summary>
+            获取服务
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
         <member name="T:Template.API.Controllers.TestController">
             <summary>
             测试控制器
             </summary>
+        </member>
+        <member name="M:Template.API.Controllers.TestController.#ctor(Template.BLL.IUserService)">
+            <summary>
+            
+            </summary>
+            <param name="userService"></param>
         </member>
         <member name="M:Template.API.Controllers.TestController.GetTestContent(System.String)">
             <summary>

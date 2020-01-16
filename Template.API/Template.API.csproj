@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Template.BLL\Template.BLL.csproj" />
     <ProjectReference Include="..\Template.Common\Template.Common.csproj" />
     <ProjectReference Include="..\Template.Model\Template.Model.csproj" />
     <ProjectReference Include="..\Template.NuGet\Template.NuGet.csproj" />

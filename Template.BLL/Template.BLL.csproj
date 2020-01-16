@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="IService\" />
-    <Folder Include="Service\" />
+    <ProjectReference Include="..\Template.Model\Template.Model.csproj" />
+    <ProjectReference Include="..\Template.NuGet\Template.NuGet.csproj" />
   </ItemGroup>
 
 </Project>

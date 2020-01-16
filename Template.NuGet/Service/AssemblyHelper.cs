@@ -14,10 +14,27 @@ namespace Template.NuGet
             List<Assembly> list = new List<Assembly>();
             foreach (CompilationLibrary library in compileLibraries)
             {
-                Assembly item = AssemblyLoadContext.Default.LoadFromAssemblyName(new AssemblyName(library.Name));
-                list.Add(item);
+                try
+                {
+                    Assembly item = Assembly.Load(new AssemblyName(library.Name));
+                    list.Add(item);
+                }
+                catch (System.Exception)
+                {
+                }
+                
             }
             return list;
         }
+        //public static List<Assembly> LoadCompileAssemblies()
+        //{
+        //    List<Assembly> list = new List<Assembly>();
+        //    foreach (CompilationLibrary library in Enumerable.ToList(from lib in DependencyContext.Default.CompileLibraries select lib))
+        //    {
+        //        Assembly item = AssemblyLoadContext.Default.LoadFromAssemblyName(new AssemblyName(library.Name));
+        //        list.Add(item);
+        //    }
+        //    return list;
+        //}
     }
 }

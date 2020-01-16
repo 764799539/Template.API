@@ -13,6 +13,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Template.BLL;
+using Template.NuGet;
 
 namespace Template.API
 {
@@ -43,6 +45,10 @@ namespace Template.API
         {
             // 如services.AddTransient<IFoo, Foo>();向容器中注入接口和实现[依赖注入(DI)]
             services.AddControllers();
+            services.AddTransient<IUserService, UserService>();
+            //注册应用服务
+            //services.RegisterAppServices(Assembly.Load("Template.BLL"));
+
             // 注入Swagger
             services.AddSwaggerGen(Swagger =>
             {
@@ -82,7 +88,6 @@ namespace Template.API
             {
                 Swagger.SwaggerEndpoint("/swagger/v1/swagger.json", "Template.API V1");
             });
-
         }
     }
 }

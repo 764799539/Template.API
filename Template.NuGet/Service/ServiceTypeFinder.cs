@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Loader;
-using System.Text;
 
 namespace Template.NuGet
 {
@@ -16,20 +15,20 @@ namespace Template.NuGet
             List<Type> list = new List<Type>();
             foreach (Assembly assembly in assemblies)
             {
-                list.AddRange((IEnumerable<Type>)Find(assembly));
+                list.AddRange(Find(assembly));
             }
             return list;
         }
 
         public static List<Type> Find(Assembly assembly) =>
-            Enumerable.ToList<Type>((IEnumerable<Type>)(from a in assembly.GetTypes() select a));
+            Enumerable.ToList(from a in assembly.GetTypes() select a);
 
         public static List<Type> FindFromCompileLibraries()
         {
             List<Type> list = new List<Type>();
             foreach (Assembly assembly in AssemblyHelper.LoadCompileAssemblies())
             {
-                list.AddRange((IEnumerable<Type>)Find(assembly));
+                list.AddRange(Find(assembly));
             }
             return list;
         }
@@ -44,7 +43,7 @@ namespace Template.NuGet
             foreach (FileSystemInfo info in new DirectoryInfo(path).GetFileSystemInfos("*.dll", SearchOption.TopDirectoryOnly))
             {
                 string str = info.Name.ToLower();
-                if (!str.StartsWith("system", (StringComparison)StringComparison.Ordinal) && !str.StartsWith("microsoft", (StringComparison)StringComparison.Ordinal))
+                if (!str.StartsWith("system", StringComparison.Ordinal) && !str.StartsWith("microsoft", StringComparison.Ordinal))
                 {
                     Assembly assembly;
                     try
@@ -59,24 +58,10 @@ namespace Template.NuGet
                             throw;
                         }
                     }
-                    list.AddRange((IEnumerable<Type>)Find(assembly));
+                    list.AddRange(Find(assembly));
                 }
             }
             return list;
         }
-
-    //    // Nested Types
-    //    [Serializable, CompilerGenerated]
-    //    private sealed class <>c
-    //{
-    //    // Fields
-    //    public static readonly ServiceTypeFinder.<>c<>9 = new ServiceTypeFinder.<>c();
-    //    public static Func<Type, bool> <>9__2_0;
-
-    //    // Methods
-    //    internal bool <Find>b__2_0(Type a) =>
-    //        (((!a.IsAbstract && a.IsClass) && typeof(IBaseService).IsAssignableFrom(a)) && (a.GetConstructor(Type.EmptyTypes) != null));
-    //}
-}
-
+    }
 }

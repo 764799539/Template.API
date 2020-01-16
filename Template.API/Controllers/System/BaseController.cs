@@ -11,7 +11,7 @@ namespace Template.API.Controllers
     /// <summary>
     /// 自定义控制器基类
     /// </summary>
-    public abstract class BaseController : Controller
+    public abstract class BaseController : ControllerBase, IDisposable
     {
         static readonly Type TypeOfCurrent = typeof(BaseController);
         static readonly Type TypeOfDisposableAttribute = typeof(DisposableAttribute);
@@ -19,12 +19,11 @@ namespace Template.API.Controllers
         /// <summary>
         /// Dispose
         /// </summary>
-        /// <param name="disposing"></param>
-        protected override void Dispose(bool disposing)
+        public void Dispose()
         {
-            base.Dispose(disposing);
             DisposeMembers();
         }
+
         /// <summary>
         /// 扫描对象内所有带有 DisposableAttribute 标记并实现了 IDisposable 接口的属性和字段，执行其 Dispose() 方法
         /// </summary>
@@ -80,21 +79,25 @@ namespace Template.API.Controllers
             }
         }
 
-        //[Disposable]
-        //ServiceFactory _serviceFactory;
-        //IServiceFactory ServiceFactory
-        //{
-        //    get
-        //    {
-        //        if (_serviceFactory == null)
-        //            _serviceFactory = new ServiceFactory(HttpContext.RequestServices);
-        //        return _serviceFactory;
-        //    }
-        //}
-
-        //protected T GetService<T>() where T : IBaseService
-        //{
-        //    return ServiceFactory.GetService<T>();
-        //}
+        [Disposable]
+        ServiceFactory _serviceFactory;
+        IServiceFactory ServiceFactory
+        {
+            get
+            {
+                if (_serviceFactory == null)
+                    _serviceFactory = new ServiceFactory(HttpContext.RequestServices);
+                return _serviceFactory;
+            }
+        }
+        /// <summary>
+        /// 获取服务
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        protected T GetService<T>() where T : IBaseService
+        {
+            return ServiceFactory.GetService<T>();
+        }
     }
 }
