@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Template.Model;
 using Template.NuGet;
 
 namespace Template.BLL
@@ -12,6 +13,6 @@ namespace Template.BLL
         /// </summary>
         /// <param name="text">测试文本</param>
         /// <returns>测试文本</returns>
-        string GetTestContent(string text);
+        Sys_User GetTestContent(string text);
     }
 }

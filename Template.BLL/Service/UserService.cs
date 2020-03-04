@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Template.NuGet;
+using Template.Model;
 
 namespace Template.BLL
 {
@@ -12,6 +13,9 @@ namespace Template.BLL
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        public string GetTestContent(string text) => text;
+        public Sys_User GetTestContent(string text) {
+            ReadDbContext.Query<Sys_User>().FirstOrDefault();
+            return null;
+        }
     }
 }

@@ -3,9 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Security.Claims;
-using System.Text;
 
 namespace Template.NuGet
 {
@@ -66,10 +64,11 @@ namespace Template.NuGet
         {
             this.EnsureArguments();
             List<Claim> list1 = new List<Claim> {
-            new Claim("sub", this.subject),
-            new Claim("jti", Guid.NewGuid().ToString())
-        };
-            IEnumerable<Claim> enumerable = Enumerable.Union<Claim>((IEnumerable<Claim>)list1, Enumerable.Select<KeyValuePair<string, string>, Claim>((IEnumerable<KeyValuePair<string, string>>)this.claims, delegate (KeyValuePair<string, string> item) {
+                new Claim("sub", this.subject),
+                new Claim("jti", Guid.NewGuid().ToString())
+            };
+            IEnumerable<Claim> enumerable = Enumerable.Union<Claim>((IEnumerable<Claim>)list1, Enumerable.Select<KeyValuePair<string, string>, Claim>((IEnumerable<KeyValuePair<string, string>>)this.claims, delegate (KeyValuePair<string, string> item)
+            {
                 return new Claim(item.Key, item.Value);
             }));
             return new JwtToken(new JwtSecurityToken(this.issuer, this.audience, enumerable, null, new DateTime?(DateTime.UtcNow.AddMinutes((double)this.expiryInMinutes)), new SigningCredentials(this.securityKey, "HS256")));
@@ -95,18 +94,18 @@ namespace Template.NuGet
             }
         }
 
-    //    // Nested Types
-    //    [Serializable, CompilerGenerated]
-    //    private sealed class <>c
-    //{
-    //    // Fields
-    //    public static readonly JwtTokenBuilder.<>c<>9 = new JwtTokenBuilder.<>c();
-    //    public static Func<KeyValuePair<string, string>, Claim> <>9__13_0;
+        //    // Nested Types
+        //    [Serializable, CompilerGenerated]
+        //    private sealed class <>c
+        //{
+        //    // Fields
+        //    public static readonly JwtTokenBuilder.<>c<>9 = new JwtTokenBuilder.<>c();
+        //    public static Func<KeyValuePair<string, string>, Claim> <>9__13_0;
 
-    //    // Methods
-    //    internal Claim<Build> b__13_0(KeyValuePair<string, string> item) =>
-    //        new Claim(item.Key, item.Value);
-    //}
-}
+        //    // Methods
+        //    internal Claim<Build> b__13_0(KeyValuePair<string, string> item) =>
+        //        new Claim(item.Key, item.Value);
+        //}
+    }
 
 }

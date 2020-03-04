@@ -30,6 +30,7 @@ namespace Template.API
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            ConfigHelper.Configuration = Configuration;
         }
 
         /// <summary>
