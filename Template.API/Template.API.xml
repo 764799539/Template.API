@@ -26,6 +26,26 @@
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
+        <member name="T:Template.API.Controllers.UserController">
+            <summary>
+            用户控制器
+            </summary>
+        </member>
+        <member name="M:Template.API.Controllers.UserController.#ctor(Template.BLL.IUserService,Template.BLL.ICommonService)">
+            <summary>
+            用户服务注入
+            </summary>
+            <param name="userService"></param>
+            <param name="commonService"></param>
+        </member>
+        <member name="M:Template.API.Controllers.UserController.Login(System.String,System.String)">
+            <summary>
+            登录
+            </summary>
+            <param name="UserName">用户名</param>
+            <param name="PassWord">密码</param>
+            <returns></returns>
+        </member>
         <member name="T:Template.API.Controllers.TestController">
             <summary>
             测试控制器

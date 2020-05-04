@@ -60,32 +60,32 @@ namespace Template.BLL
 
         public int GetCount<TEntity>(Expression<Func<TEntity, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return ReadDbContext.Query<TEntity>(predicate).Count();
         }
 
         public int GetCountByWrite<TEntity>(Expression<Func<TEntity, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return WriteDbContext.Query<TEntity>(predicate).Count();
         }
 
         public List<TEntity> GetList<TEntity>()
         {
-            throw new NotImplementedException();
+            return ReadDbContext.Query<TEntity>().ToList<TEntity>();
         }
 
         public List<TEntity> GetList<TEntity>(Expression<Func<TEntity, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return ReadDbContext.Query<TEntity>(predicate).ToList<TEntity>();
         }
 
         public int Update<TEntity>(TEntity entity)
         {
-            throw new NotImplementedException();
+            return WriteDbContext.Update<TEntity>(entity);
         }
 
         public int Update<TEntity>(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, TEntity>> content)
         {
-            throw new NotImplementedException();
+            return WriteDbContext.Update<TEntity>(predicate, content);
         }
     }
 }

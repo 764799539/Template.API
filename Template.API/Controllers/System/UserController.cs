@@ -13,13 +13,16 @@ namespace Template.API.Controllers
     public class UserController : BaseController
     {
         private readonly IUserService _userService;
+        private readonly ICommonService _commonService;
         /// <summary>
         /// 用户服务注入
         /// </summary>
         /// <param name="userService"></param>
-        public UserController(IUserService userService)
+        /// <param name="commonService"></param>
+        public UserController(IUserService userService, ICommonService commonService)
         {
             _userService = userService;
+            _commonService = commonService;
         }
 
         /// <summary>
@@ -34,6 +37,12 @@ namespace Template.API.Controllers
                 return new JsonReturn<Sys_User> { Status = ResultStatus.Failed, Msg = "用户名或密码不能为空！" };
             if (string.IsNullOrEmpty(PassWord))
                 return new JsonReturn<Sys_User> { Status = ResultStatus.Failed, Msg = "密码不能为空！" };
+            Sys_User_LoginAuth userLoginAuth = _commonService.Get<Sys_User_LoginAuth>(sa => sa.Identifier == UserName && sa.Certificate == PassWord && sa.Type == 1 && sa.Status == 0);
+
+
+
+
+
 
             return new JsonReturn<Sys_User> { Status = ResultStatus.OK, Data = new Sys_User() };
         }
