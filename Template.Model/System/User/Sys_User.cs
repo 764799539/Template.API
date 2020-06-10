@@ -4,6 +4,9 @@ using Template.NuGet;
 
 namespace Template.Model
 {
+    /// <summary>
+    /// 用户
+    /// </summary>
     public class Sys_User : BaseEntity<Sys_User>
     {
         /// <summary>

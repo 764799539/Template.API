@@ -1108,7 +1108,7 @@
             },
             {
               "name": "CreateBy",
-              "type": "UserID",
+              "type": "ID",
               "remark": "",
               "chnname": "创建人"
             },
@@ -1120,7 +1120,7 @@
             },
             {
               "name": "UpdateBy",
-              "type": "UserID",
+              "type": "ID",
               "remark": "",
               "chnname": "更新人"
             },
@@ -1224,7 +1224,7 @@
             },
             {
               "name": "CreateBy",
-              "type": "UserID",
+              "type": "ID",
               "remark": "",
               "chnname": "创建人"
             },
@@ -1236,7 +1236,7 @@
             },
             {
               "name": "UpdateBy",
-              "type": "UserID",
+              "type": "ID",
               "remark": "",
               "chnname": "更新人"
             },
@@ -1346,7 +1346,7 @@
             },
             {
               "name": "CreateBy",
-              "type": "UserID",
+              "type": "ID",
               "remark": "",
               "chnname": "创建人"
             },
@@ -1358,7 +1358,7 @@
             },
             {
               "name": "UpdateBy",
-              "type": "UserID",
+              "type": "ID",
               "remark": "",
               "chnname": "更新人"
             },
