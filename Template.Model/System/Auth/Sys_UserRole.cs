@@ -5,13 +5,17 @@ using System.Text;
 namespace Template.Model
 {
     /// <summary>
-    /// 用户拓展信息表
+    /// 用户角色关系
     /// </summary>
-    public class Sys_User_Extra : BaseEntity<Sys_User_Extra>
+    public class Sys_UserRole : BaseEntity<Sys_UserRole>
     {
         /// <summary>
         /// 用户ID
         /// </summary>
         public long UserID { get; set; }
+        /// <summary>
+        /// 角色ID
+        /// </summary>
+        public long RoleID { get; set; }
     }
 }

@@ -7,7 +7,7 @@ namespace Template.Model
     /// <summary>
     /// 用户位置信息
     /// </summary>
-    public class Sys_User_Location : BaseEntity<Sys_User>
+    public class Sys_User_Location : BaseEntity<Sys_User_Location>
     {
         /// <summary>
         /// 用户ID

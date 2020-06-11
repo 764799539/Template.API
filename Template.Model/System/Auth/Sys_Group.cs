@@ -5,18 +5,14 @@ using System.Text;
 namespace Template.Model
 {
     /// <summary>
-    /// 权限
+    /// 组
     /// </summary>
-    public class Sys_Auth : BaseEntity<Sys_Auth>
+    public class Sys_Group : BaseEntity<Sys_Group>
     {
         /// <summary>
         /// 父级ID
         /// </summary>
         public long ParentID { get; set; }
-        /// <summary>
-        /// 类型(1菜单 2按钮/功能)
-        /// </summary>
-        public int Type { get; set; }
         /// <summary>
         /// 名称
         /// </summary>
