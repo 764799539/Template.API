@@ -9,17 +9,6 @@ namespace Template.Model
 {
     public class BaseEntity
     {
-        //public BaseEntity()
-        //{  
-        //    this.Property(a => a.ID).IsPrimaryKey();
-        //    this.Property(a => a.Status);
-        //    this.Property(a => a.IsDelete);
-        //    this.Property(a => a.Revision);
-        //    this.Property(a => a.CreateBy);
-        //    this.Property(a => a.CreateDate);
-        //    this.Property(a => a.UpdateBy);
-        //    this.Property(a => a.UpdateDate);
-        //}
         /// <summary>
         /// SnowFlakeID
         /// </summary>

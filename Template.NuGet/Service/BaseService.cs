@@ -9,6 +9,11 @@ namespace Template.NuGet
         private IDbContext _WriteDbContext;
         private IDbContext _ReadDbContext;
 
+        protected BaseService(IServiceFactory serviceFactory)
+        {
+            ServiceFactory = serviceFactory;
+        }
+
         /// <summary>
         /// 写库上下文
         /// </summary>
@@ -33,11 +38,9 @@ namespace Template.NuGet
         {
         }
 
-        protected BaseService(IServiceFactory serviceFactory)
-        {
-            ServiceFactory = serviceFactory;
-        }
-
+        /// <summary>
+        /// 释放
+        /// </summary>
         public void Dispose()
         {
             if (_WriteDbContext != null)

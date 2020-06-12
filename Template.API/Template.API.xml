@@ -26,9 +26,21 @@
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
+        <member name="T:Template.API.Controllers.SystemController">
+            <summary>
+            系统API
+            </summary>
+        </member>
+        <member name="M:Template.API.Controllers.SystemController.SaveAuth(Template.Model.Sys_Auth)">
+            <summary>
+            新增权限
+            </summary>
+            <param name="entity">权限实体</param>
+            <returns></returns>
+        </member>
         <member name="T:Template.API.Controllers.UserController">
             <summary>
-            用户控制器
+            用户API
             </summary>
         </member>
         <member name="M:Template.API.Controllers.UserController.#ctor(Template.BLL.IUserService,Template.BLL.ICommonService)">

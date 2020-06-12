@@ -9,15 +9,14 @@ namespace Template.NuGet
 {
     public sealed class JwtTokenBuilder
     {
-        // Fields
         private SecurityKey securityKey;
         private string subject = "";
         private string issuer = "";
         private string audience = "";
         private Dictionary<string, string> claims = new Dictionary<string, string>();
         private int expiryInMinutes = 5;
+        
 
-        // Methods
         public JwtTokenBuilder AddAudience(string audience)
         {
             this.audience = audience;
@@ -32,7 +31,7 @@ namespace Template.NuGet
 
         public JwtTokenBuilder AddClaims(Dictionary<string, string> claims)
         {
-            Enumerable.Union<KeyValuePair<string, string>>((IEnumerable<KeyValuePair<string, string>>)this.claims, (IEnumerable<KeyValuePair<string, string>>)claims);
+            Enumerable.Union(this.claims, claims);
             return this;
         }
 
@@ -67,7 +66,7 @@ namespace Template.NuGet
                 new Claim("sub", this.subject),
                 new Claim("jti", Guid.NewGuid().ToString())
             };
-            IEnumerable<Claim> enumerable = Enumerable.Union<Claim>((IEnumerable<Claim>)list1, Enumerable.Select<KeyValuePair<string, string>, Claim>((IEnumerable<KeyValuePair<string, string>>)this.claims, delegate (KeyValuePair<string, string> item)
+            IEnumerable<Claim> enumerable = Enumerable.Union(list1, Enumerable.Select(claims, delegate (KeyValuePair<string, string> item)
             {
                 return new Claim(item.Key, item.Value);
             }));

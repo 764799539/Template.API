@@ -7,7 +7,6 @@ namespace Template.NuGet
 {
     public static class JwtSecurityKey
     {
-        // Methods
         public static SymmetricSecurityKey Create(string secret) =>
             new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secret));
     }

@@ -19,9 +19,9 @@ namespace Template.NuGet
             {
                 str = Configuration[key];
             }
-            catch (Exception exception1)
+            catch (Exception ex)
             {
-                throw exception1;
+                throw ex;
             }
             return str;
         }

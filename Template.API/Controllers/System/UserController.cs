@@ -6,7 +6,7 @@ using Template.NuGet;
 namespace Template.API.Controllers
 {
     /// <summary>
-    /// 用户控制器
+    /// 用户API
     /// </summary>
     [ApiController]
     [Route("API/[controller]")]
