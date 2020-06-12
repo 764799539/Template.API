@@ -7,7 +7,7 @@ namespace Template.Model
     /// <summary>
     /// 用户组关系
     /// </summary>
-    public class Sys_UserGroup : BaseEntity<Sys_UserGroup>
+    public class Sys_UserGroup : BaseEntity
     {
         /// <summary>
         /// 用户ID

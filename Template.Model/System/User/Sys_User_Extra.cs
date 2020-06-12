@@ -7,7 +7,7 @@ namespace Template.Model
     /// <summary>
     /// 用户拓展信息表
     /// </summary>
-    public class Sys_User_Extra : BaseEntity<Sys_User_Extra>
+    public class Sys_User_Extra : BaseEntity
     {
         /// <summary>
         /// 用户ID

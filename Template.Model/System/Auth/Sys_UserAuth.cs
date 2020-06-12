@@ -7,7 +7,7 @@ namespace Template.Model
     /// <summary>
     /// 用户权限关系
     /// </summary>
-    public class Sys_UserAuth : BaseEntity<Sys_UserAuth>
+    public class Sys_UserAuth : BaseEntity
     {
         /// <summary>
         /// 用户ID

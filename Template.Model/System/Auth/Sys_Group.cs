@@ -7,7 +7,7 @@ namespace Template.Model
     /// <summary>
     /// 组
     /// </summary>
-    public class Sys_Group : BaseEntity<Sys_Group>
+    public class Sys_Group : BaseEntity
     {
         /// <summary>
         /// 父级ID

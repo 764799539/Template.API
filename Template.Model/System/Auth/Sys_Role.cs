@@ -7,7 +7,7 @@ namespace Template.Model
     /// <summary>
     /// 角色
     /// </summary>
-    public class Sys_Role : BaseEntity<Sys_Role>
+    public class Sys_Role : BaseEntity
     {
         /// <summary>
         /// 父级ID

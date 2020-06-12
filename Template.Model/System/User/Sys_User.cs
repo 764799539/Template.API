@@ -7,7 +7,7 @@ namespace Template.Model
     /// <summary>
     /// 用户
     /// </summary>
-    public class Sys_User : BaseEntity<Sys_User>
+    public class Sys_User : BaseEntity
     {
         /// <summary>
         /// 用户编号

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Template.NuGet;
+﻿using Microsoft.AspNetCore.Mvc;
 using Template.BLL;
 using Template.Model;
+using Template.NuGet;
 
 namespace Template.API.Controllers
 {
@@ -31,7 +27,10 @@ namespace Template.API.Controllers
         /// <param name="text"></param>
         /// <returns></returns>
         [HttpGet, HttpPost, Route("GetTestContent")]
-        public JsonReturn<Sys_User> GetTestContent(string text) => new JsonReturn<Sys_User> { Data = _userService.GetTestContent(text), Status = ResultStatus.OK, Msg = "" };
+        public JsonReturn<Sys_User> GetTestContent(string text)
+        {
+            return new JsonReturn<Sys_User> { Data = _userService.GetTestContent(text), Status = ResultStatus.OK, Msg = "" };
+        }
 
     }
 }

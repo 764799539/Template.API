@@ -10,7 +10,7 @@ namespace Template.Model
     /// <summary>
     /// 用户授权信息
     /// </summary>
-    public class Sys_User_LoginAuth : BaseEntity<Sys_User_LoginAuth>
+    public class Sys_User_LoginAuth : BaseEntity
     {
         /// <summary>
         /// 用户ID

@@ -7,7 +7,7 @@ namespace Template.Model
     /// <summary>
     /// 角色权限关系
     /// </summary>
-    public class Sys_RoleAuth : BaseEntity<Sys_RoleAuth>
+    public class Sys_RoleAuth : BaseEntity
     {
         /// <summary>
         /// 角色ID

@@ -7,7 +7,7 @@ namespace Template.Model
     /// <summary>
     /// 组权限关系
     /// </summary>
-    public class Sys_GroupAuth : BaseEntity<Sys_GroupAuth>
+    public class Sys_GroupAuth : BaseEntity
     {
         /// <summary>
         /// 组ID

@@ -7,7 +7,7 @@ namespace Template.Model
     /// <summary>
     /// 用户角色关系
     /// </summary>
-    public class Sys_UserRole : BaseEntity<Sys_UserRole>
+    public class Sys_UserRole : BaseEntity
     {
         /// <summary>
         /// 用户ID
