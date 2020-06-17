@@ -7,6 +7,9 @@ using Template.NuGet;
 
 namespace Template.Model
 {
+    /// <summary>
+    /// 实体基类
+    /// </summary>
     public class BaseEntity
     {
         /// <summary>

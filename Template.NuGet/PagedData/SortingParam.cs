@@ -7,7 +7,6 @@ namespace Template.NuGet
     [Serializable]
     public class SortingParam
     {
-        // Properties
         public string SortName { get; set; }
 
         public string SortOrder { get; set; }

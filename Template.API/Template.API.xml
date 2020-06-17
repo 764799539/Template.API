@@ -4,6 +4,142 @@
         <name>Template.API</name>
     </assembly>
     <members>
+        <member name="T:Template.API.AuthorizationAttribute">
+            <summary>
+            权限验证过滤器
+            </summary>
+        </member>
+        <member name="M:Template.API.AuthorizationAttribute.#ctor(System.String)">
+            <summary>
+            创建
+            </summary>
+            <param name="usecaseKey"></param>
+        </member>
+        <member name="M:Template.API.AuthorizationAttribute.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="T:Template.API.HttpHeaderOperation">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Template.API.HttpHeaderOperation.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+            
+            </summary>
+            <param name="operation"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:Template.API.AuthManager">
+            <summary>
+            用户权限管理类
+            </summary>
+        </member>
+        <member name="P:Template.API.AuthManager.UserID">
+            <summary>
+            当前登录用户编号
+            </summary>
+        </member>
+        <member name="P:Template.API.AuthManager.UserName">
+            <summary>
+            当前登录用户姓名
+            </summary>
+        </member>
+        <member name="P:Template.API.AuthManager.Token">
+            <summary>
+            当前登录用户Token
+            </summary>
+        </member>
+        <member name="M:Template.API.AuthManager.GetClaimByKey(System.String)">
+            <summary>
+            Gets the claim by key.
+            </summary>
+            <returns>The claim by key.</returns>
+            <param name="key">Key</param>
+        </member>
+        <member name="M:Template.API.AuthManager.CheckUsecase(System.String)">
+            <summary>
+            判断用户是否有权限
+            </summary>
+            <param name="AuthName">权限名</param>
+            <returns>true or false</returns>
+        </member>
+        <member name="M:Template.API.AuthManager.GetUserUsecaseList">
+            <summary>
+            获取当前用户有权限的用例编号列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Template.API.EncodingHelper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Template.API.EncodingHelper.SendPost(System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Post方式提交数据，返回网页的源代码
+            </summary>
+            <param name="url">发送请求的 URL</param>
+            <param name="param">请求的参数集合</param>
+            <returns>远程资源的响应结果</returns>
+        </member>
+        <member name="M:Template.API.EncodingHelper.Encrypt(System.String,System.String,System.String)">
+            <summary>
+            电商Sign签名
+            </summary>
+            <param name="content">内容</param>
+            <param name="keyValue">Appkey</param>
+            <param name="charset">URL编码 </param>
+            <returns>DataSign签名</returns>
+        </member>
+        <member name="M:Template.API.EncodingHelper.MD5(System.String,System.String)">
+            <summary>
+             字符串MD5加密
+            </summary>
+            <param name="str">要加密的字符串</param>
+            <param name="charset">编码方式</param>
+            <returns>密文</returns>
+        </member>
+        <member name="M:Template.API.EncodingHelper.Base64(System.String,System.String)">
+            <summary>
+            base64编码
+            </summary>
+            <param name="str">内容</param>
+            <param name="charset">编码方式</param>
+            <returns></returns>
+        </member>
+        <member name="T:Template.API.WebHelper">
+            <summary>
+            网站帮助类
+            </summary>
+        </member>
+        <member name="M:Template.API.WebHelper.GetUniqueCode(System.String)">
+            <summary>
+            获取唯一数字编码
+            </summary>
+            <returns>The unique code.</returns>
+            <param name="preStr">编码前缀</param>
+        </member>
+        <member name="M:Template.API.WebHelper.GetRandomInt(System.Int32,System.Int32)">
+            <summary>
+            生成一个指定范围的随机整数，该随机数范围包括最小值，但不包括最大值
+            </summary>
+            <param name="minNum">最小值</param>
+            <param name="maxNum">最大值</param>
+        </member>
+        <member name="M:Template.API.WebHelper.HideSensitiveInfo(System.String,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            隐藏敏感信息
+            </summary>
+            <param name="input">信息实体</param>
+            <param name="left">左边保留的字符数</param>
+            <param name="right">右边保留的字符数</param>
+            <param name="basedOnLeft">当长度异常时，是否显示左边;<code>true</code>显示左边，<code>false</code>显示右边</param>
+            <returns></returns>
+        </member>
         <member name="T:Template.API.Controllers.BaseController">
             <summary>
             自定义控制器基类
@@ -50,12 +186,13 @@
             <param name="userService"></param>
             <param name="commonService"></param>
         </member>
-        <member name="M:Template.API.Controllers.UserController.Login(System.String,System.String)">
+        <member name="M:Template.API.Controllers.UserController.Login(System.String,System.String,System.Int32)">
             <summary>
             登录
             </summary>
             <param name="UserName">用户名</param>
             <param name="PassWord">密码</param>
+            <param name="LoginType">登录类型(1用户名 2手机号 3邮箱 4QQ 5微信 6腾讯微博 7新浪微博)</param>
             <returns></returns>
         </member>
         <member name="T:Template.API.Controllers.TestController">

@@ -14,6 +14,10 @@ namespace Template.Model
         /// </summary>
         public string UserCode { get; set; }
         /// <summary>
+        /// 用户名
+        /// </summary>
+        public string UserName { get; set; }
+        /// <summary>
         /// 昵称
         /// </summary>
         public string NickName { get; set; }
@@ -61,5 +65,10 @@ namespace Template.Model
         /// 特殊用户类型(1系统管理帐号 2广告投放商帐号)
         /// </summary>
         public int? SpecialType { get; set; }
+        /// <summary>
+        /// 用户当前Token
+        /// </summary>
+        [NotMapped]
+        public string Token { get; set; }
     }
 }

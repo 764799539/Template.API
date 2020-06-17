@@ -9,102 +9,89 @@ namespace Template.NuGet
 {
     public sealed class JwtTokenBuilder
     {
-        private SecurityKey securityKey;
-        private string subject = "";
-        private string issuer = "";
-        private string audience = "";
-        private Dictionary<string, string> claims = new Dictionary<string, string>();
-        private int expiryInMinutes = 5;
-        
+        private SecurityKey SecurityKey;
+        private string Subject = "";
+        private string Issuer = "";
+        private string Audience = "";
+        private Dictionary<string, string> Claims = new Dictionary<string, string>();
+        private int ExpiryInMinutes = 5;
 
-        public JwtTokenBuilder AddAudience(string audience)
+
+        public JwtTokenBuilder AddAudience(string Audience)
         {
-            this.audience = audience;
+            this.Audience = Audience;
             return this;
         }
 
         public JwtTokenBuilder AddClaim(string type, string value)
         {
-            this.claims.Add(type, value);
+            Claims.Add(type, value);
             return this;
         }
 
-        public JwtTokenBuilder AddClaims(Dictionary<string, string> claims)
+        public JwtTokenBuilder AddClaims(Dictionary<string, string> Claims)
         {
-            Enumerable.Union(this.claims, claims);
+            Enumerable.Union(this.Claims, Claims);
             return this;
         }
 
-        public JwtTokenBuilder AddExpiry(int expiryInMinutes)
+        public JwtTokenBuilder AddExpiry(int ExpiryInMinutes)
         {
-            this.expiryInMinutes = expiryInMinutes;
+            this.ExpiryInMinutes = ExpiryInMinutes;
             return this;
         }
 
-        public JwtTokenBuilder AddIssuer(string issuer)
+        public JwtTokenBuilder AddIssuer(string Issuer)
         {
-            this.issuer = issuer;
+            this.Issuer = Issuer;
             return this;
         }
 
-        public JwtTokenBuilder AddSecurityKey(SecurityKey securityKey)
+        public JwtTokenBuilder AddSecurityKey(SecurityKey SecurityKey)
         {
-            this.securityKey = securityKey;
+            this.SecurityKey = SecurityKey;
             return this;
         }
 
-        public JwtTokenBuilder AddSubject(string subject)
+        public JwtTokenBuilder AddSubject(string Subject)
         {
-            this.subject = subject;
+            this.Subject = Subject;
             return this;
         }
 
         public JwtToken Build()
         {
-            this.EnsureArguments();
-            List<Claim> list1 = new List<Claim> {
-                new Claim("sub", this.subject),
+            EnsureArguments();
+            List<Claim> list = new List<Claim> {
+                new Claim("sub", Subject),
                 new Claim("jti", Guid.NewGuid().ToString())
             };
-            IEnumerable<Claim> enumerable = Enumerable.Union(list1, Enumerable.Select(claims, delegate (KeyValuePair<string, string> item)
+            IEnumerable<Claim> enumerable = Enumerable.Union(list, Enumerable.Select(Claims, delegate (KeyValuePair<string, string> item)
             {
                 return new Claim(item.Key, item.Value);
             }));
-            return new JwtToken(new JwtSecurityToken(this.issuer, this.audience, enumerable, null, new DateTime?(DateTime.UtcNow.AddMinutes((double)this.expiryInMinutes)), new SigningCredentials(this.securityKey, "HS256")));
+            return new JwtToken(new JwtSecurityToken(Issuer, Audience, enumerable, null, new DateTime?(DateTime.UtcNow.AddMinutes(ExpiryInMinutes)), new SigningCredentials(SecurityKey, "HS256")));
         }
 
         private void EnsureArguments()
         {
-            if (this.securityKey == null)
+            if (SecurityKey == null)
             {
-                throw new ArgumentNullException("Security Key");
+                throw new ArgumentNullException("Security Key Is Null");
             }
-            if (string.IsNullOrEmpty(this.subject))
+            if (string.IsNullOrEmpty(Subject))
             {
-                throw new ArgumentNullException("Subject");
+                throw new ArgumentNullException("Subject Is NullOrEmpty");
             }
-            if (string.IsNullOrEmpty(this.issuer))
+            if (string.IsNullOrEmpty(Issuer))
             {
-                throw new ArgumentNullException("Issuer");
+                throw new ArgumentNullException("Issuer Is NullOrEmpty");
             }
-            if (string.IsNullOrEmpty(this.audience))
+            if (string.IsNullOrEmpty(Audience))
             {
-                throw new ArgumentNullException("Audience");
+                throw new ArgumentNullException("Audience Is NullOrEmpty");
             }
         }
-
-        //    // Nested Types
-        //    [Serializable, CompilerGenerated]
-        //    private sealed class <>c
-        //{
-        //    // Fields
-        //    public static readonly JwtTokenBuilder.<>c<>9 = new JwtTokenBuilder.<>c();
-        //    public static Func<KeyValuePair<string, string>, Claim> <>9__13_0;
-
-        //    // Methods
-        //    internal Claim<Build> b__13_0(KeyValuePair<string, string> item) =>
-        //        new Claim(item.Key, item.Value);
-        //}
     }
 
 }

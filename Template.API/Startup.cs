@@ -4,11 +4,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Threading.Tasks;
 using System;
 using System.IO;
 using System.Reflection;
 using Template.BLL;
 using Template.NuGet;
+
 
 namespace Template.API
 {
@@ -41,18 +45,73 @@ namespace Template.API
             // 如services.AddTransient<IFoo, Foo>();向容器中注入接口和实现[依赖注入(DI)]
             services.AddControllers();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ICommonService, CommonService>();
             //注册应用服务
             //services.RegisterAppServices(Assembly.Load("Template.BLL"));
+
+            // 注册token
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                    .AddJwtBearer(options =>
+                    {
+                        options.TokenValidationParameters = new TokenValidationParameters
+                        {
+                            ValidateIssuer = true,
+                            ValidateAudience = true,
+                            ValidateLifetime = true,
+                            ValidateIssuerSigningKey = true,
+
+                            ValidIssuer = Configuration["Authorization:Issuer"],
+                            ValidAudience = Configuration["Authorization:Audience"],
+                            IssuerSigningKey = JwtSecurityKey.Create(Configuration["Authorization:SecretKey"])
+                        };
+
+                        options.Events = new JwtBearerEvents
+                        {
+                            OnAuthenticationFailed = context =>
+                            {
+                                return Task.CompletedTask;
+                            },
+                            OnTokenValidated = context =>
+                            {
+                                return Task.CompletedTask;
+                            }
+                        };
+                    });
+
+            //分割成字符串数组
+            string[] origins = Configuration["AllowedOrigins:Urls"].Split('|');
+            //配置跨域处理
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigin", builder =>
+                {
+                    builder.WithOrigins(origins) //允许指定来源的主机访问
+                    .SetIsOriginAllowedToAllowWildcardSubdomains()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials();
+                });
+            });
 
             // 注入Swagger
             services.AddSwaggerGen(Swagger =>
             {
                 Swagger.SwaggerDoc("v1", new OpenApiInfo { Title = "Template.API", Version = "v1" });
-                //添加控制器层注释（true表示显示控制器注释）
+                // 添加控制器层注释（true表示显示控制器注释）
                 Swagger.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"), true);
+                // 处理复杂名称
+                Swagger.CustomSchemaIds((type) => type.FullName);
+                Swagger.OperationFilter<HttpHeaderOperation>(); // 添加httpHeader参数
+                Swagger.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey
+                });
             });
 
-            //定义返回的json原样返回，不使用驼峰命名规范
+            // 定义返回的json原样返回，不使用驼峰命名规范
             services.AddControllers().AddJsonOptions(options =>
             {
                 options.JsonSerializerOptions.PropertyNamingPolicy = null;
@@ -71,6 +130,9 @@ namespace Template.API
                 app.UseDeveloperExceptionPage();
             }
 
+            // 使用跨域配置
+            app.UseCors("AllowAllOrigin");
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -81,6 +143,7 @@ namespace Template.API
             {
                 endpoints.MapControllers();
             });
+
 
             // 启用中间件为生成的 JSON 文档
             app.UseSwagger();

@@ -7,21 +7,16 @@ namespace Template.NuGet
 {
     public sealed class JwtToken
     {
-        // Fields
-        private JwtSecurityToken token;
+        private JwtSecurityToken Token;
 
-        // Methods
-        internal JwtToken(JwtSecurityToken token)
+        internal JwtToken(JwtSecurityToken Token)
         {
-            this.token = token;
+            this.Token = Token;
         }
 
-        // Properties
-        public DateTime ValidTo =>
-            this.token.ValidTo;
+        public DateTime ValidTo => Token.ValidTo;
 
-        public string Value =>
-            new JwtSecurityTokenHandler().WriteToken(this.token);
+        public string Value => new JwtSecurityTokenHandler().WriteToken(Token);
     }
 
 }

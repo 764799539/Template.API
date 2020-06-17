@@ -4,6 +4,11 @@
         <name>Template.Model</name>
     </assembly>
     <members>
+        <member name="T:Template.Model.BaseEntity">
+            <summary>
+            实体基类
+            </summary>
+        </member>
         <member name="P:Template.Model.BaseEntity.ID">
             <summary>
             SnowFlakeID
@@ -49,9 +54,54 @@
             特殊用户类型枚举类
             </summary>
         </member>
+        <member name="F:Template.Model.SpecialUserTypeEnum.Master">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Template.Model.SpecialUserTypeEnum.Advertisement">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Template.Model.UserAuthTypeEnum">
             <summary>
             用户授权类型枚举类
+            </summary>
+        </member>
+        <member name="F:Template.Model.UserAuthTypeEnum.UserName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Template.Model.UserAuthTypeEnum.Mobile">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Template.Model.UserAuthTypeEnum.Email">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Template.Model.UserAuthTypeEnum.QQ">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Template.Model.UserAuthTypeEnum.WeChat">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Template.Model.UserAuthTypeEnum.TencentMicroBlog">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Template.Model.UserAuthTypeEnum.SinaMicroBlog">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:Template.Model.UserRegisterSourceEnum">
@@ -59,9 +109,59 @@
             用户注册来源枚举类
             </summary>
         </member>
+        <member name="F:Template.Model.UserRegisterSourceEnum.UserName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Template.Model.UserRegisterSourceEnum.Mobile">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Template.Model.UserRegisterSourceEnum.Email">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Template.Model.UserRegisterSourceEnum.QQ">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Template.Model.UserRegisterSourceEnum.WeChat">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Template.Model.UserRegisterSourceEnum.TencentMicroBlog">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Template.Model.UserRegisterSourceEnum.SinaMicroBlog">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Template.Model.UserStatusEnum">
             <summary>
             用户状态枚举类
+            </summary>
+        </member>
+        <member name="F:Template.Model.UserStatusEnum.Normal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Template.Model.UserStatusEnum.Ban">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Template.Model.UserStatusEnum.Delete">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:Template.Model.Sys_Auth">
@@ -229,6 +329,11 @@
             用户编号
             </summary>
         </member>
+        <member name="P:Template.Model.Sys_User.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
         <member name="P:Template.Model.Sys_User.NickName">
             <summary>
             昵称
@@ -287,6 +392,11 @@
         <member name="P:Template.Model.Sys_User.SpecialType">
             <summary>
             特殊用户类型(1系统管理帐号 2广告投放商帐号)
+            </summary>
+        </member>
+        <member name="P:Template.Model.Sys_User.Token">
+            <summary>
+            用户当前Token
             </summary>
         </member>
         <member name="T:Template.Model.Sys_User_Extra">

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Template.BLL;
 using Template.Model;
 using Template.NuGet;
@@ -9,6 +10,7 @@ namespace Template.API.Controllers
     /// 测试控制器
     /// </summary>
     [ApiController]
+    //[Authorize(Policy = "User")]
     [Route("API/[controller]")]
     public class TestController : BaseController
     {
@@ -27,6 +29,7 @@ namespace Template.API.Controllers
         /// <param name="text"></param>
         /// <returns></returns>
         [HttpGet, HttpPost, Route("GetTestContent")]
+        //[Authorization("AIStore_Search")]
         public JsonReturn<Sys_User> GetTestContent(string text)
         {
             return new JsonReturn<Sys_User> { Data = _userService.GetTestContent(text), Status = ResultStatus.OK, Msg = "" };

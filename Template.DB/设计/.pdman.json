@@ -23,6 +23,12 @@
               "chnname": "用户编号"
             },
             {
+              "name": "UserName",
+              "type": "Name",
+              "remark": "",
+              "chnname": "用户名"
+            },
+            {
               "name": "NickName",
               "type": "Name",
               "remark": "",
