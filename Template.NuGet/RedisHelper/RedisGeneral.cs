@@ -42,8 +42,6 @@ namespace Template.NuGet
         }
 
         // Properties
-        public PooledRedisClientManager RedisClientsManager =>
-            this._redisClientsManager;
+        public PooledRedisClientManager RedisClientsManager => this._redisClientsManager;
     }
-
 }

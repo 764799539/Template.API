@@ -7,10 +7,8 @@ namespace Template.NuGet
 {
     public interface IRedis
     {
-        // Methods
         void Start();
 
-        // Properties
         PooledRedisClientManager RedisClientsManager { get; }
     }
 

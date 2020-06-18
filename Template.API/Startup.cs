@@ -12,7 +12,7 @@ using System.IO;
 using System.Reflection;
 using Template.BLL;
 using Template.NuGet;
-
+using Microsoft.AspNetCore.Http;
 
 namespace Template.API
 {
@@ -46,6 +46,8 @@ namespace Template.API
             services.AddControllers();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ICommonService, CommonService>();
+            // 可删除？
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             //注册应用服务
             //services.RegisterAppServices(Assembly.Load("Template.BLL"));
 
@@ -96,7 +98,14 @@ namespace Template.API
             // 注入Swagger
             services.AddSwaggerGen(Swagger =>
             {
-                Swagger.SwaggerDoc("v1", new OpenApiInfo { Title = "Template.API", Version = "v1" });
+                //Swagger.SwaggerDoc("v1", new OpenApiInfo { Title = "Template.API", Version = "v1" });
+                Swagger.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "EmptyDream Template Project",
+                    Description = "RESTful API for Template.API",
+                    Contact = new OpenApiContact { Name = "EmptyDream", Email = "764799539@qq.com" }
+                });
                 // 添加控制器层注释（true表示显示控制器注释）
                 Swagger.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"), true);
                 // 处理复杂名称
@@ -110,16 +119,21 @@ namespace Template.API
                     Type = SecuritySchemeType.ApiKey
                 });
             });
+            //services.AddMvc(options =>
+            //{
+            //    options.Filters.Add(typeof(GlobalExceptionFilter));
+            //});
 
-            // 定义返回的json原样返回，不使用驼峰命名规范
+
             services.AddControllers().AddJsonOptions(options =>
             {
+                // 定义返回的json原样返回，不使用驼峰命名规范
                 options.JsonSerializerOptions.PropertyNamingPolicy = null;
             });
         }
 
         /// <summary>
-        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline
+        /// 此方法由Runtime调用。使用此方法配置HTTP请求管道
         /// </summary>
         /// <param name="app"></param>
         /// <param name="env"></param>
@@ -147,11 +161,13 @@ namespace Template.API
 
             // 启用中间件为生成的 JSON 文档
             app.UseSwagger();
+
             // 为SwaggerUI提供服务
             app.UseSwaggerUI(Swagger =>
             {
                 Swagger.SwaggerEndpoint("/swagger/v1/swagger.json", "Template.API V1");
             });
+
         }
     }
 }

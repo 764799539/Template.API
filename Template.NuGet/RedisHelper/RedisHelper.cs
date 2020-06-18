@@ -8,29 +8,33 @@ using System.Text;
 
 namespace Template.NuGet
 {
+    /// <summary>
+    /// Redis帮助类
+    /// </summary>
     public static class RedisHelper
     {
-        // Fields
         private static IRedis _redisHelper;
+        /// <summary>
+        /// Redis设置
+        /// </summary>
         private static RedisSettings _RedisSettings = RedisSettings.Config;
 
-        // Methods
         static RedisHelper()
         {
             string mode = _RedisSettings.Mode;
             string type = string.Empty;
             RedisProviders redisProviders = _RedisSettings.RedisProviders;
-            if ((redisProviders.RedisSentinelProvider != null) && string.Equals(redisProviders.RedisSentinelProvider.Name, mode, (StringComparison)StringComparison.CurrentCultureIgnoreCase))
+            if ((redisProviders.RedisSentinelProvider != null) && string.Equals(redisProviders.RedisSentinelProvider.Name, mode, StringComparison.CurrentCultureIgnoreCase))
             {
                 type = redisProviders.RedisSentinelProvider.Type;
             }
-            else if ((redisProviders.RedisGeneralProvider != null) && string.Equals(redisProviders.RedisGeneralProvider.Name, mode, (StringComparison)StringComparison.CurrentCultureIgnoreCase))
+            else if ((redisProviders.RedisGeneralProvider != null) && string.Equals(redisProviders.RedisGeneralProvider.Name, mode, StringComparison.CurrentCultureIgnoreCase))
             {
                 type = redisProviders.RedisGeneralProvider.Type;
             }
             if (string.IsNullOrWhiteSpace(type))
             {
-                throw new RedisException("not found type of redis, Please check mode node.");
+                throw new RedisException("找不到Redis模式节点, 请选择模式节点。");
             }
             _redisHelper = Activator.CreateInstance(Type.GetType(type)) as IRedis;
             _redisHelper.Start();
@@ -56,7 +60,7 @@ namespace Template.NuGet
                     num++;
                 }
             }
-            return (long)num;
+            return num;
         }
 
         public static long AddSortSetList<T>(string key, List<T> list, Func<T, object> generateValue, Func<T, double> generateScore)
@@ -549,9 +553,7 @@ namespace Template.NuGet
             }
         }
 
-        // Properties
-        public static PooledRedisClientManager RedisClientManager =>
-            _redisHelper.RedisClientsManager;
+        public static PooledRedisClientManager RedisClientManager =>  _redisHelper.RedisClientsManager;
     }
 
 }

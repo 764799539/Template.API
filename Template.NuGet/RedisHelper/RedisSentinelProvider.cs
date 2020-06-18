@@ -6,7 +6,6 @@ namespace Template.NuGet
 {
     public class RedisSentinelProvider
     {
-        // Properties
         public string Name { get; set; }
 
         public string Type { get; set; }
