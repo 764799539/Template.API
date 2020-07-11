@@ -21,24 +21,12 @@ namespace Template.API
         /// <summary>
         /// 当前登录用户编号
         /// </summary>
-        public static string UserID
-        {
-            get
-            {
-                return GetClaimByKey("UserID");
-            }
-        }
+        public static long UserID => (long)GetClaimByKey("UserID");
 
         /// <summary>
         /// 当前登录用户姓名
         /// </summary>
-        public static string UserName
-        {
-            get
-            {
-                return GetClaimByKey("UserName");
-            }
-        }
+        public static string UserName => (string)GetClaimByKey("UserName");
         /// <summary>
         /// 当前登录用户Token
         /// </summary>
@@ -58,7 +46,6 @@ namespace Template.API
                 {
                     _Token = string.Empty;
                 }
-
                 return _Token;
             }
         }
@@ -67,7 +54,7 @@ namespace Template.API
         /// </summary>
         /// <returns>The claim by key.</returns>
         /// <param name="key">Key</param>
-        public static string GetClaimByKey(string key)
+        public static object GetClaimByKey(string key)
         {
             try
             {

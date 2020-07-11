@@ -55,15 +55,23 @@ namespace Template.API
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddJwtBearer(options =>
                     {
+                        // Token验证参数
                         options.TokenValidationParameters = new TokenValidationParameters
                         {
+                            // 是否验证发行人
                             ValidateIssuer = true,
+                            // 是否验证接收人
                             ValidateAudience = true,
+                            // 是否验证 超时?
                             ValidateLifetime = true,
+                            // 是否验证密匙
                             ValidateIssuerSigningKey = true,
 
+                            // 发行人
                             ValidIssuer = Configuration["Authorization:Issuer"],
+                            // 接收人
                             ValidAudience = Configuration["Authorization:Audience"],
+                            // 密匙
                             IssuerSigningKey = JwtSecurityKey.Create(Configuration["Authorization:SecretKey"])
                         };
 
@@ -79,6 +87,7 @@ namespace Template.API
                             }
                         };
                     });
+
 
             //分割成字符串数组
             string[] origins = Configuration["AllowedOrigins:Urls"].Split('|');

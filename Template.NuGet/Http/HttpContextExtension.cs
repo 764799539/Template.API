@@ -24,8 +24,7 @@ namespace Template.NuGet
         //public static bool IsAjaxRequest(this HttpContext httpContext) => httpContext.Request.IsAjaxRequest;
         public static bool IsHttps(this HttpContext httpContext) => httpContext.Request.IsHttps;
 
-        public static HttpContext Current =>
-            ((IHttpContextAccessor)CommonHelper.ServiceProvider.GetService(Type.GetTypeFromHandle(typeof(IHttpContextAccessor).TypeHandle))).HttpContext;
+        public static HttpContext Current => ((IHttpContextAccessor)CommonHelper.ServiceProvider.GetService(Type.GetTypeFromHandle(typeof(IHttpContextAccessor).TypeHandle))).HttpContext;
     }
 
 }

@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using ServiceStack;
 using Template.NuGet;
 
 namespace Template.API
@@ -15,9 +16,9 @@ namespace Template.API
         string _UsecaseKey = string.Empty;
 
         /// <summary>
-        /// 标记传入授权名称
+        /// 标记传入授权标记
         /// </summary>
-        /// <param name="usecaseKey"></param>
+        /// <param name="usecaseKey">授权标记</param>
         public AuthorizationAttribute(string usecaseKey)
         {
             _UsecaseKey = usecaseKey;
@@ -29,12 +30,12 @@ namespace Template.API
         /// <param name="context"></param>
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            if (!AuthManager.CheckUsecase(_UsecaseKey))
-            {
-                var result = JsonReturn.CreateResult(ResultStatus.Unauthorized, "对不起，您没有此操作权限！");
-                ContentResult contentResult = new ContentResult() { Content = JsonHelper.Serialize(result) };
-                context.Result = contentResult;
-            }
+            //if (!AuthManager.CheckUsecase(_UsecaseKey))
+            //{
+            //    var result = JsonReturn.CreateResult(ResultStatus.Unauthorized, "对不起，您没有此操作权限！");
+            //    ContentResult contentResult = new ContentResult() { Content = JsonHelper.Serialize(result) };
+            //    context.Result = contentResult;
+            //}
         }
         ///// <summary>
         ///// 控制器中加了该属性的方法执行完成后才会来执行该方法。

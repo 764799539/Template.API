@@ -19,14 +19,14 @@ namespace Template.Model
         public long ID { get; set; }
 
         /// <summary>
-        /// 状态(0正常)
+        /// 状态
         /// </summary>
-        public int? Status { get; set; }
+        public int Status { get; set; }
 
         /// <summary>
-        /// 是否删除(0否)
+        /// 是否删除
         /// </summary>
-        public int? IsDelete { get; set; }
+        public bool IsDelete { get; set; }
 
         /// <summary>
         /// 乐观锁

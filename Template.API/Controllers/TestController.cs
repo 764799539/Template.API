@@ -29,7 +29,7 @@ namespace Template.API.Controllers
         /// <param name="text"></param>
         /// <returns></returns>
         [HttpGet, HttpPost, Route("GetTestContent")]
-        //[Authorization("AIStore_Search")]
+        [Authorization("AIStore_Search")]
         public JsonReturn<Sys_User> GetTestContent(string text)
         {
             return new JsonReturn<Sys_User> { Data = _userService.GetTestContent(text), Status = ResultStatus.OK, Msg = "" };

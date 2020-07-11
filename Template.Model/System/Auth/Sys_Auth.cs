@@ -16,7 +16,7 @@ namespace Template.Model
         /// <summary>
         /// 类型(1菜单 2按钮/功能)
         /// </summary>
-        public int Type { get; set; }
+        public AuthTypeEnum Type { get; set; }
         /// <summary>
         /// 名称
         /// </summary>

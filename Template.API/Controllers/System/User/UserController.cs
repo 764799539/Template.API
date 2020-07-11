@@ -44,7 +44,7 @@ namespace Template.API.Controllers
                 Sys_User_LoginAuth UserLoginAuth = _commonService.Get<Sys_User_LoginAuth>(sa => sa.Identifier == UserName && sa.Certificate == PassWord && sa.Type == LoginType && sa.Status == 0);
                 if (UserLoginAuth == null)
                     return new JsonReturn<dynamic> { Status = ResultStatus.Failed, Msg = "用户名或密码错误！" };
-                Sys_User User = _commonService.Get<Sys_User>(sa => sa.ID == UserLoginAuth.UserID);
+                Sys_User User = _commonService.Get<Sys_User>(UserLoginAuth.UserID);
                 if (User == null)
                     return new JsonReturn<dynamic> { Status = ResultStatus.Failed, Msg = "您的信息异常，请联系客服！" };
                 if (User.Status == (int)UserStatusEnum.Ban)
@@ -59,7 +59,7 @@ namespace Template.API.Controllers
                                     .AddClaim("UserID", User.ID.ToString())
                                     .AddClaim("UserName", User.NickName)
                                     .AddExpiry(Convert.ToInt32(ConfigHelper.GetAppConfig("Authorization:Expiry")))
-                                    .Build();
+                                    .Build(); 
                 User.Token = token.Value;
                 var result = new { User };
                 return new JsonReturn<dynamic> { Status = ResultStatus.OK, Data = result };
@@ -68,7 +68,6 @@ namespace Template.API.Controllers
             {
                 return new JsonReturn<dynamic> { Status = ResultStatus.Failed, Msg = ex.InnerException.ToString() };
             }
-            
         }
 
 
