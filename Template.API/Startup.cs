@@ -156,7 +156,8 @@ namespace Template.API
             // 使用跨域配置
             app.UseCors("AllowAllOrigin");
 
-            app.UseHttpsRedirection();
+            // 调用HTTPS重定向中间件, 所有HTTP请求转换为HTTPS
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 

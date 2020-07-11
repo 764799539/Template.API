@@ -30,9 +30,10 @@ namespace Template.API.Controllers
         /// <returns></returns>
         [HttpGet, HttpPost, Route("GetTestContent")]
         [Authorization("AIStore_Search")]
-        public JsonReturn<Sys_User> GetTestContent(string text)
+        public JsonReturn<dynamic> GetTestContent(string text)
         {
-            return new JsonReturn<Sys_User> { Data = _userService.GetTestContent(text), Status = ResultStatus.OK, Msg = "" };
+            long ID = MySnowFlakeHelper.NextId();
+            return new JsonReturn<dynamic> { Data = _userService.GetTestContent(text), Status = ResultStatus.OK, Msg = "" };
         }
 
     }

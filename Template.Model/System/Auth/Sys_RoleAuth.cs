@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Chloe.Annotations;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -17,5 +18,11 @@ namespace Template.Model
         /// 权限ID
         /// </summary>
         public long AuthID { get; set; }
+        
+        /// <summary>
+        /// 权限对象
+        /// </summary>
+        [NotMapped]
+        public Sys_Auth Auth { get; set; }
     }
 }

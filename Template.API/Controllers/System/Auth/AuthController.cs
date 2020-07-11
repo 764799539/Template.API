@@ -16,15 +16,19 @@ namespace Template.API.Controllers
     {
         private readonly IUserService _userService;
         private readonly ICommonService _commonService;
+        private readonly IAuthService _authService;
+
         /// <summary>
         /// 用户服务注入
         /// </summary>
         /// <param name="userService"></param>
         /// <param name="commonService"></param>
-        public AuthController(IUserService userService, ICommonService commonService)
+        /// <param name="authService"></param>
+        public AuthController(IUserService userService, ICommonService commonService,IAuthService authService)
         {
             _userService = userService;
             _commonService = commonService;
+            _authService = authService;
         }
 
         #region 权限
@@ -67,6 +71,7 @@ namespace Template.API.Controllers
         /// <summary>
         /// 删除权限
         /// </summary>
+        /// <param name="ID">权限ID</param>
         /// <returns></returns>
         [HttpPost, Route("DeleteAuth")]
         [Authorization("Auth_Del")]
@@ -125,6 +130,7 @@ namespace Template.API.Controllers
         /// <summary>
         /// 删除角色
         /// </summary>
+        /// <param name="ID">角色ID</param>
         /// <returns></returns>
         [HttpPost, Route("DeleteRole")]
         [Authorization("Role_Del")]
@@ -185,6 +191,7 @@ namespace Template.API.Controllers
         /// <summary>
         /// 删除角色
         /// </summary>
+        /// <param name="ID">组ID</param>
         /// <returns></returns>
         [HttpPost, Route("DeleteGroup")]
         [Authorization("Group_Del")]
@@ -205,5 +212,81 @@ namespace Template.API.Controllers
             return new JsonReturn<List<Sys_Group>> { Status = ResultStatus.OK, Data = _commonService.GetList<Sys_Group>(sa => sa.IsDelete == false), Msg = "" };
         }
         #endregion
+
+        #region 角色权限
+        /// <summary>
+        /// 获取角色权限列表
+        /// </summary>
+        /// <param name="RoleID">角色ID</param>
+        /// <param name="Type">权限类型</param>
+        /// <returns></returns>
+        public JsonReturn<List<Sys_RoleAuth>> GetRoleAuthList(long RoleID,AuthTypeEnum Type)
+        {
+            return new JsonReturn<List<Sys_RoleAuth>> { Status = ResultStatus.OK, Data = _authService.GetRoleAuthList(RoleID, Type), Msg = "" };
+        }
+        ///// <summary>
+        ///// 保存角色权限
+        ///// </summary>
+        ///// <param name="RoleID">角色ID</param>
+        ///// <param name="AddAuthIDList">增加的权限ID列表</param>
+        ///// <param name="DelAuthIDList">减少的权限ID列表</param>
+        ///// <returns></returns>
+        //[HttpPost, Route("SaveRoleAuth")]
+        //[Authorization("RoleAuth_Save")]
+        //public JsonReturn<bool> SaveRoleAuth(long RoleID,List<long> AddAuthIDList, List<long> DelAuthIDList)
+        //{
+        //    AddAuthIDList.ForEach(item => 
+        //    {
+        //        _commonService.Insert(new Sys_RoleAuth()
+        //        {
+        //            AuthID = item,
+        //            RoleID = RoleID,
+        //            CreateBy = AuthManager.UserID,
+        //            CreateDate = DateTime.Now
+        //        });
+        //    });
+        //    _commonService.Update<Sys_RoleAuth>(sa => sa.RoleID == RoleID && DelAuthIDList.Contains(sa.AuthID), sa => new Sys_RoleAuth() { IsDelete = true });
+        //    return new JsonReturn<bool> { Status = ResultStatus.OK, Data = true, Msg = "" };
+        //}
+        #endregion
+
+        //#region 组权限
+        ///// <summary>
+        ///// 获取组权限列表
+        ///// </summary>
+        ///// <param name="GroupID">组ID</param>
+        ///// <param name="Type">权限类型</param>
+        ///// <returns></returns>
+        //public JsonReturn<List<Sys_Auth>> GetRoleAuthList(long GroupID, AuthTypeEnum Type)
+        //{
+        //    return new JsonReturn<List<Sys_Auth>> { Status = ResultStatus.OK, Data = _commonService.GetList<Sys_Auth>(sa => sa.IsDelete = false && sa.Type == Type), Msg = "" };
+        //}
+        ///// <summary>
+        ///// 保存组权限
+        ///// </summary>
+        ///// <param name="GroupID">组ID</param>
+        ///// <param name="AddAuthIDList">增加的权限ID列表</param>
+        ///// <param name="DelAuthIDList">减少的权限ID列表</param>
+        ///// <returns></returns>
+        //[HttpPost, Route("SaveRoleAuth")]
+        //[Authorization("RoleAuth_Save")]
+        //public JsonReturn<bool> SaveRoleAuth(long GroupID, List<long> AddAuthIDList, List<long> DelAuthIDList)
+        //{
+        //    AddAuthIDList.ForEach(item =>
+        //    {
+        //        _commonService.Insert(new Sys_RoleAuth()
+        //        {
+        //            AuthID = item,
+        //            GroupID = GroupID,
+        //            CreateBy = AuthManager.UserID,
+        //            CreateDate = DateTime.Now
+        //        });
+        //    });
+        //    _commonService.Update<Sys_RoleAuth>(sa => sa.GroupID == GroupID && DelAuthIDList.Contains(sa.AuthID), sa => new Sys_RoleAuth() { sa.IsDelete = true });
+        //    return new JsonReturn<bool> { Status = ResultStatus.OK, Data = true, Msg = "" }
+        //}
+        //#endregion
+
+
     }
 }
