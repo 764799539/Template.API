@@ -9,11 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Chloe" Version="4.6.2" />
+    <PackageReference Include="Chloe" Version="4.8.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Template.NuGet\Template.NuGet.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Param\System\User\" />
   </ItemGroup>
 
 </Project>

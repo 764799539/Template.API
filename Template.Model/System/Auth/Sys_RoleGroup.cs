@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Chloe.Annotations;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -17,5 +18,7 @@ namespace Template.Model
         /// 组ID
         /// </summary>
         public long GroupID { get; set; }
+
+        
     }
 }

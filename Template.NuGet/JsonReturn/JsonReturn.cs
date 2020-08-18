@@ -5,44 +5,37 @@ namespace Template.NuGet
     [Serializable]
     public class JsonReturn
     {
-        // Methods
         public JsonReturn()
         {
-            this.Status = ResultStatus.OK;
+            Status = ResultStatus.OK;
         }
 
         public JsonReturn(ResultStatus status)
         {
-            this.Status = ResultStatus.OK;
-            this.Status = status;
+            Status = status;
         }
 
         public JsonReturn(ResultStatus status, string code, string msg)
         {
-            this.Status = ResultStatus.OK;
-            this.Status = status;
-            this.Code = code;
-            this.Msg = msg;
+            Status = ResultStatus.OK;
+            Status = status;
+            Code = code;
+            Msg = msg;
         }
 
-        public static JsonReturn<T> CreateResult<T>(T data) =>
-            CreateResult<T>(ResultStatus.OK, data);
+        public static JsonReturn<T> CreateResult<T>(T data) => CreateResult<T>(ResultStatus.OK, data);
 
-        public static JsonReturn<T> CreateResult<T>(ResultStatus status) =>
-            CreateResult<T>(status, default(T));
+        public static JsonReturn<T> CreateResult<T>(ResultStatus status) => CreateResult<T>(status, default(T));
 
-        public static JsonReturn<T> CreateResult<T>(ResultStatus status, T data) =>
-            new JsonReturn<T>(status) { Data = data };
+        public static JsonReturn<T> CreateResult<T>(ResultStatus status, T data) => new JsonReturn<T>(status) { Data = data };
 
-        public static JsonReturn CreateResult(string code = null, string msg = null) =>
-            CreateResult(ResultStatus.OK, code, msg);
+        public static JsonReturn CreateResult(string code = null, string msg = null) => CreateResult(ResultStatus.OK, code, msg);
 
-        public static JsonReturn CreateResult(ResultStatus status, string code = null, string msg = null) =>
-            new JsonReturn(status)
-            {
-                Code = code,
-                Msg = msg
-            };
+        public static JsonReturn CreateResult(ResultStatus status, string code = null, string msg = null) => new JsonReturn(status)
+        {
+            Code = code,
+            Msg = msg
+        };
 
         // Properties
         public ResultStatus Status { get; set; }
@@ -64,7 +57,7 @@ namespace Template.NuGet
 
         public JsonReturn(ResultStatus status, T data) : base(status)
         {
-            this.Data = data;
+            Data = data;
         }
 
         // Properties

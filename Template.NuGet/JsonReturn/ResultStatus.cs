@@ -7,9 +7,10 @@ namespace Template.NuGet
     public enum ResultStatus
     {
         OK = 100,
+        NotMeetRequirement = 105,
         Failed = 101,
-        NotLogin = 102,
-        Unauthorized = 103
+        Unauthorized = 103,
+        NotLogin = 102
     }
 
 }

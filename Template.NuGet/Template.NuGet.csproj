@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Chloe" Version="4.6.2" />
-    <PackageReference Include="Chloe.Extension" Version="4.6.2" />
-    <PackageReference Include="Chloe.SqlServer" Version="4.6.2" />
+    <PackageReference Include="Chloe" Version="4.8.0" />
+    <PackageReference Include="Chloe.Extension" Version="4.7.0" />
+    <PackageReference Include="Chloe.SqlServer" Version="4.8.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.5" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.5" />

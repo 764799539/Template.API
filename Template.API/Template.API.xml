@@ -11,13 +11,13 @@
         </member>
         <member name="M:Template.API.AuthorizationAttribute.#ctor(System.String)">
             <summary>
-            创建
+            标记传入授权标记
             </summary>
-            <param name="usecaseKey"></param>
+            <param name="usecaseKey">授权标记</param>
         </member>
         <member name="M:Template.API.AuthorizationAttribute.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
             <summary>
-            
+            控制器中加了该标记的方法中代码执行之前该方法，所以可以用做权限校验。
             </summary>
             <param name="context"></param>
         </member>
@@ -162,16 +162,145 @@
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <member name="T:Template.API.Controllers.SystemController">
+        <member name="T:Template.API.Controllers.AuthController">
             <summary>
             系统API
             </summary>
         </member>
-        <member name="M:Template.API.Controllers.SystemController.SaveAuth(Template.Model.Sys_Auth)">
+        <member name="M:Template.API.Controllers.AuthController.#ctor(Template.BLL.IUserService,Template.BLL.ICommonService,Template.BLL.IAuthService)">
             <summary>
-            新增权限
+            授权服务注入
+            </summary>
+            <param name="userService"></param>
+            <param name="commonService"></param>
+            <param name="authService"></param>
+        </member>
+        <member name="M:Template.API.Controllers.AuthController.SaveAuth(Template.Model.Sys_Auth)">
+            <summary>
+            保存权限
             </summary>
             <param name="entity">权限实体</param>
+            <returns></returns>
+        </member>
+        <member name="M:Template.API.Controllers.AuthController.DeleteAuth(System.Int64)">
+            <summary>
+            删除权限
+            </summary>
+            <param name="ID">权限ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Template.API.Controllers.AuthController.GetAuthList(Template.Model.AuthSearchParam,Template.NuGet.PagingParam,Template.NuGet.SortingParam)">
+            <summary>
+            获取权限列表
+            </summary>
+            <param name="searchParam">查询参数</param>
+            <param name="pagingParam">分页参数</param>
+            <param name="sortingParam">排序参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:Template.API.Controllers.AuthController.SaveRole(Template.Model.Sys_Role)">
+            <summary>
+            保存角色
+            </summary>
+            <param name="entity">权限实体</param>
+            <returns></returns>
+        </member>
+        <member name="M:Template.API.Controllers.AuthController.DeleteRole(System.Int64)">
+            <summary>
+            删除角色
+            </summary>
+            <param name="ID">角色ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Template.API.Controllers.AuthController.GetRoleList(Template.Model.RoleSearchParam,Template.NuGet.PagingParam,Template.NuGet.SortingParam)">
+            <summary>
+            获取角色列表
+            </summary>
+            <param name="searchParam">查询参数</param>
+            <param name="pagingParam">分页参数</param>
+            <param name="sortingParam">排序参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:Template.API.Controllers.AuthController.SaveGroup(Template.Model.Sys_Group)">
+            <summary>
+            保存组
+            </summary>
+            <param name="entity">组实体</param>
+            <returns></returns>
+        </member>
+        <member name="M:Template.API.Controllers.AuthController.DeleteGroup(System.Int64)">
+            <summary>
+            删除角色
+            </summary>
+            <param name="ID">组ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Template.API.Controllers.AuthController.GetGroupList(Template.Model.GroupSearchParam,Template.NuGet.PagingParam,Template.NuGet.SortingParam)">
+            <summary>
+            获取角色列表
+            </summary>
+            <param name="searchParam"></param>
+            <param name="pagingParam"></param>
+            <param name="sortingParam"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Template.API.Controllers.AuthController.SaveUserRole(System.Int64,System.Int64)">
+            <summary>
+            用户分配角色
+            </summary>
+            <param name="UserID">用户ID</param>
+            <param name="RoleID">角色ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Template.API.Controllers.AuthController.GetRoleAuthList(System.Int64,Template.Model.AuthTypeEnum)">
+            <summary>
+            获取角色权限列表
+            </summary>
+            <param name="RoleID">角色ID</param>
+            <param name="Type">权限类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Template.API.Controllers.AuthController.SaveRoleAuth(System.Int64,System.Collections.Generic.List{System.Int64},System.Collections.Generic.List{System.Int64})">
+            <summary>
+            保存角色权限
+            </summary>
+            <param name="RoleID">角色ID</param>
+            <param name="AddAuthIDList">增加的权限ID列表</param>
+            <param name="DelAuthIDList">减少的权限ID列表</param>
+            <returns></returns>
+        </member>
+        <member name="M:Template.API.Controllers.AuthController.GetGroupAuthList(System.Int64,Template.Model.AuthTypeEnum)">
+            <summary>
+            获取组权限列表
+            </summary>
+            <param name="GroupID">组ID</param>
+            <param name="Type">权限类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Template.API.Controllers.AuthController.SaveGroupAuth(System.Int64,System.Collections.Generic.List{System.Int64},System.Collections.Generic.List{System.Int64})">
+            <summary>
+            保存组权限
+            </summary>
+            <param name="GroupID">组ID</param>
+            <param name="AddAuthIDList">增加的权限ID列表</param>
+            <param name="DelAuthIDList">减少的权限ID列表</param>
+            <returns></returns>
+        </member>
+        <member name="M:Template.API.Controllers.AuthController.GetUserAuthList(System.Int64,Template.Model.AuthTypeEnum)">
+            <summary>
+            获取用户权限列表
+            </summary>
+            <param name="UserID">用户ID</param>
+            <param name="Type">权限类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Template.API.Controllers.AuthController.SaveUserAuth(System.Int64,System.Collections.Generic.List{System.Int64},System.Collections.Generic.List{System.Int64})">
+            <summary>
+            保存用户权限
+            </summary>
+            <param name="UserID">用户ID</param>
+            <param name="AddAuthIDList">增加的权限ID列表</param>
+            <param name="DelAuthIDList">减少的权限ID列表</param>
             <returns></returns>
         </member>
         <member name="T:Template.API.Controllers.UserController">
@@ -186,7 +315,7 @@
             <param name="userService"></param>
             <param name="commonService"></param>
         </member>
-        <member name="M:Template.API.Controllers.UserController.Login(System.String,System.String,System.Int32)">
+        <member name="M:Template.API.Controllers.UserController.LoginAsync(System.String,System.String,System.Int32)">
             <summary>
             登录
             </summary>
@@ -272,7 +401,7 @@
         </member>
         <member name="M:Template.API.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
             <summary>
-            This method gets called by the runtime. Use this method to configure the HTTP request pipeline
+            此方法由Runtime调用。使用此方法配置HTTP请求管道
             </summary>
             <param name="app"></param>
             <param name="env"></param>

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Template.NuGet
 {
-    public class SnowFlakeHelper
+    public static class SnowFlakeHelper
     {
         /// <summary>
         /// 开始时间截
@@ -62,42 +62,22 @@ namespace Template.NuGet
         /// <summary>
         /// 毫秒内序列(0~4095)
         /// </summary>
-        private long _sequence = 0L;
+        private static long _sequence = 0L;
 
         /// <summary>
         /// 上次生成Id的时间截
         /// </summary>
-        private long _lastTimestamp = -1L;
+        private static long _lastTimestamp = -1L;
 
         /// <summary>
         /// 工作节点Id
         /// </summary>
-        public long WorkerId { get; protected set; }
+        public static long WorkerId { get; set; } = Convert.ToInt64(ConfigHelper.GetAppConfig("SnowFlake:WorkerId"));
 
         /// <summary>
         /// 数据中心Id
         /// </summary>
-        public long DatacenterId { get; protected set; }
-
-        /// <summary>
-        /// 构造器
-        /// </summary>
-        /// <param name="workerId">工作ID (0~31)</param>
-        /// <param name="datacenterId">数据中心ID (0~31)</param>
-        public SnowFlakeHelper(long workerId, long datacenterId)
-        {
-            WorkerId = workerId;
-            DatacenterId = datacenterId;
-
-            if (workerId > MaxWorkerId || workerId < 0)
-            {
-                throw new ArgumentException(string.Format($"工作ID必须在0至{MaxWorkerId}之间"));
-            }
-            if (datacenterId > MaxDatacenterId || datacenterId < 0)
-            {
-                throw new ArgumentException(string.Format($"数据中心ID必须在0至{MaxDatacenterId}之间"));
-            }
-        }
+        public static long DatacenterId { get; set; } = Convert.ToInt64(ConfigHelper.GetAppConfig("SnowFlake:WorkerId"));
 
         private static readonly object _lockObj = new object();
 
@@ -105,9 +85,9 @@ namespace Template.NuGet
         /// 获得下一个ID (该方法是线程安全的)
         /// </summary>
         /// <returns></returns>
-        public virtual long NextId()
+        public static long NextId()
         {
-            // 分布式或负载均衡情况下有ID冲撞[隐患]
+            // 分布式或负载均衡情况下有ID冲撞可能[隐患]
             lock (_lockObj)
             {
                 //获取当前时间戳
@@ -116,8 +96,7 @@ namespace Template.NuGet
                 //如果当前时间小于上一次ID生成的时间戳，说明系统时钟回退过这个时候应当抛出异常
                 if (timestamp < _lastTimestamp)
                 {
-                    throw new InvalidOperationException(string.Format(
-                        $"系统时钟出现回退，拒绝生成{_lastTimestamp - timestamp}毫秒的ID"));
+                    throw new InvalidOperationException($"系统时钟出现回退，拒绝生成{_lastTimestamp - timestamp}毫秒的ID");
                 }
 
                 //如果是同一时间生成的，则进行毫秒内序列
@@ -131,10 +110,9 @@ namespace Template.NuGet
                         timestamp = TilNextMillis(_lastTimestamp);
                     }
                 }
-
-                //时间戳改变，毫秒内序列重置
                 else
                 {
+                    //时间戳改变，毫秒内序列重置
                     _sequence = 0;
                 }
 
@@ -142,9 +120,7 @@ namespace Template.NuGet
                 _lastTimestamp = timestamp;
 
                 //移位并通过或运算拼到一起组成64位的ID
-                return ((timestamp - Twepoch) << TimestampLeftShift) |
-                         (DatacenterId << DatacenterIdShift) |
-                         (WorkerId << WorkerIdShift) | _sequence;
+                return ((timestamp - Twepoch) << TimestampLeftShift) | (DatacenterId << DatacenterIdShift) | (WorkerId << WorkerIdShift) | _sequence;
             }
         }
 
@@ -161,7 +137,7 @@ namespace Template.NuGet
         /// 生成当前时间戳
         /// </summary>
         /// <returns>毫秒</returns>
-        protected virtual long TimeGen()
+        public static long TimeGen()
         {
             return GetTimestamp();
         }
@@ -171,7 +147,7 @@ namespace Template.NuGet
         /// </summary>
         /// <param name="lastTimestamp">上次生成Id的时间截</param>
         /// <returns></returns>
-        protected virtual long TilNextMillis(long lastTimestamp)
+        public static long TilNextMillis(long lastTimestamp)
         {
             var timestamp = TimeGen();
             while (timestamp <= lastTimestamp)

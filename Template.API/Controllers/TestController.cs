@@ -32,7 +32,7 @@ namespace Template.API.Controllers
         [Authorization("AIStore_Search")]
         public JsonReturn<dynamic> GetTestContent(string text)
         {
-            long ID = MySnowFlakeHelper.NextId();
+            long ID = SnowFlakeHelper.NextId();
             return new JsonReturn<dynamic> { Data = _userService.GetTestContent(text), Status = ResultStatus.OK, Msg = "" };
         }
 

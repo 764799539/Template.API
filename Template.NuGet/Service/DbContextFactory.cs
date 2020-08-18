@@ -30,36 +30,33 @@ namespace Template.NuGet
         public static IDbContext CreateReadContext() => CreateContext(ReadConnectionString, DbType);
         public static IDbContext CreateWriteContext() => CreateContext(WriteConnectionString, DbType);
 
-        public static IDbContext CreateContext(string connString, string dbType) => CreateSqlServerContext(connString);
+        public static IDbContext CreateContext(string connString, string dbType) => CreateSqlServerContext(connString, dbType);
         /// <summary>
-        /// 创建SqlServer数据库上下文对象
+        /// 创建数据库上下文对象
         /// </summary>
         /// <param name="connString">连接字符串</param>
         /// <returns>SqlServer数据库上下文对象</returns>
-        private static IDbContext CreateSqlServerContext(string connString)
+        private static IDbContext CreateSqlServerContext(string connString,string dbType)
         {
-            MsSqlContext context = new MsSqlContext(connString);
-            context.PagingMode = PagingMode.OFFSET_FETCH;
-            return context;
+            dbType = "SqlServer";
+            switch (dbType)
+            {
+                case "SqlServer":
+                    MsSqlContext context = new MsSqlContext(connString);
+                    //设置分页方式为Offset方式
+                    context.PagingMode = PagingMode.OFFSET_FETCH;
+                    return context;
+                case "MySql":
+                    return null;
+                case "Oracle":
+                    return null;
+                case "SQLite":
+                    return null;
+                case "PostgreSQL":
+                    return null;
+                default:
+                    throw new Exception("Config \"DbType\" is illegal");
+            }
         }
     }
 }
-//多数据库支持
-//public static IDbContext CreateContext(string connString, string dbType)
-//{
-//    switch (dbType)
-//    {
-//        case "SqlServer":
-//            return CreateSqlServerContext(connString);
-//        case "MySql":
-//            return null;
-//        case "Oracle":
-//            return null;
-//        case "SQLite":
-//            return null;
-//        case "PostgreSQL":
-//            return null;
-//        default:
-//            throw new Exception("Config \"DbType\" is illegal");
-//    }
-//}

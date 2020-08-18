@@ -3,6 +3,7 @@ using Chloe.SqlServer;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Template.Model;
 using Template.NuGet;
 
@@ -16,7 +17,7 @@ namespace Template.BLL
         /// <typeparam name="TEntity">实体类</typeparam>
         /// <param name="entity">实体对象</param>
         /// <returns>实体对象</returns>
-        public TEntity Insert<TEntity>(TEntity entity) where TEntity : BaseEntity => WriteDbContext.Insert(entity);
+        public async Task<TEntity> InsertAsync<TEntity>(TEntity entity) where TEntity : BaseEntity => await WriteDbContext.InsertAsync(entity);
         
         /// <summary>
         /// 批量插入
@@ -31,7 +32,7 @@ namespace Template.BLL
         /// <typeparam name="TEntity">实体类</typeparam>
         /// <param name="Predicate">Lambda条件</param>
         /// <returns>受影响行数</returns>
-        public int Delete<TEntity>(Expression<Func<TEntity, bool>> Predicate) where TEntity : BaseEntity => WriteDbContext.Delete(Predicate);
+        public async Task<int> DeleteAsync<TEntity>(Expression<Func<TEntity, bool>> Predicate) where TEntity : BaseEntity => await WriteDbContext.DeleteAsync(Predicate);
 
         /// <summary>
         /// 物理删除
@@ -39,7 +40,7 @@ namespace Template.BLL
         /// <typeparam name="TEntity">实体类</typeparam>
         /// <param name="entity">实体对象</param>
         /// <returns>受影响行数</returns>
-        public int Delete<TEntity>(TEntity entity) where TEntity : BaseEntity => WriteDbContext.Delete(entity);
+        public async Task<int> DeleteAsync<TEntity>(TEntity entity) where TEntity : BaseEntity => await WriteDbContext.DeleteAsync(entity);
 
         /// <summary>
         /// 物理删除
@@ -47,7 +48,7 @@ namespace Template.BLL
         /// <typeparam name="TEntity">实体类</typeparam>
         /// <param name="Key">主键值</param>
         /// <returns>受影响行数</returns>
-        public int Delete<TEntity>(object Key) where TEntity : BaseEntity => WriteDbContext.Delete(Key);
+        public async Task<int> DeleteAsync<TEntity>(object Key) where TEntity : BaseEntity => await WriteDbContext.DeleteAsync(Key);
 
         /// <summary>
         /// 更新实体
@@ -55,7 +56,7 @@ namespace Template.BLL
         /// <typeparam name="TEntity">实体类</typeparam>
         /// <param name="entity">实体对象</param>
         /// <returns>受影响行数</returns>
-        public int Update<TEntity>(TEntity entity) where TEntity : BaseEntity => WriteDbContext.Update(entity);
+        public async Task<int> UpdateAsync<TEntity>(TEntity entity) where TEntity : BaseEntity => await WriteDbContext.UpdateAsync(entity);
         /// <summary>
         /// 指定字段、条件更新实体
         /// </summary>
@@ -63,7 +64,7 @@ namespace Template.BLL
         /// <param name="Predicate">Lambda条件</param>
         /// <param name="Content">更新内容</param>
         /// <returns>受影响行数</returns>
-        public int Update<TEntity>(Expression<Func<TEntity, bool>> Predicate, Expression<Func<TEntity, TEntity>> Content) where TEntity : BaseEntity => WriteDbContext.Update(Predicate, Content);
+        public async Task<int> UpdateAsync<TEntity>(Expression<Func<TEntity, bool>> Predicate, Expression<Func<TEntity, TEntity>> Content) where TEntity : BaseEntity => await WriteDbContext.UpdateAsync(Predicate, Content);
 
         /// <summary>
         /// 获取实体对象
@@ -144,7 +145,9 @@ namespace Template.BLL
         /// <returns>实体对象列表</returns>
         public List<TEntity> GetList<TEntity>(Expression<Func<TEntity, bool>> Predicate) where TEntity : BaseEntity => ReadDbContext.Query(Predicate).ToList<TEntity>();
 
-        
+
+
+
 
 
 

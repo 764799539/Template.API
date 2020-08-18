@@ -8,19 +8,6 @@ namespace Template.BLL
 {
     public class UserService : BaseService, IUserService
     {
-
-
-
-
-
-
-
-
-
-
-
-
-
         /// <summary>
         /// 获取
         /// </summary>
@@ -28,21 +15,7 @@ namespace Template.BLL
         /// <returns></returns>
         public Sys_User GetTestContent(string text) {
             Sys_User result = ReadDbContext.Query<Sys_User>().FirstOrDefault();
-            return result;  
+            return result;
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

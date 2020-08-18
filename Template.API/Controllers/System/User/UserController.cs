@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading.Tasks;
 using Template.BLL;
 using Template.Model;
 using Template.NuGet;
@@ -33,24 +34,25 @@ namespace Template.API.Controllers
         /// <param name="PassWord">密码</param>
         /// <param name="LoginType">登录类型(1用户名 2手机号 3邮箱 4QQ 5微信 6腾讯微博 7新浪微博)</param>
         /// <returns></returns>
-        [HttpPost,HttpGet, Route("Login")]
-        public JsonReturn<dynamic> Login(string UserName,string PassWord,int LoginType = 1) {
+        [HttpPost, Route("Login")]
+        public async Task<JsonReturn<dynamic>> LoginAsync(string UserName, string PassWord, int LoginType = 1)
+        {
             try
             {
                 if (string.IsNullOrEmpty(UserName))
-                    return new JsonReturn<dynamic> { Status = ResultStatus.Failed, Msg = "用户名不能为空！" };
+                    return new JsonReturn<dynamic> { Status = ResultStatus.NotMeetRequirement, Msg = "用户名不能为空！" };
                 if (string.IsNullOrEmpty(PassWord))
-                    return new JsonReturn<dynamic> { Status = ResultStatus.Failed, Msg = "密码不能为空！" };
+                    return new JsonReturn<dynamic> { Status = ResultStatus.NotMeetRequirement, Msg = "密码不能为空！" };
                 Sys_User_LoginAuth UserLoginAuth = _commonService.Get<Sys_User_LoginAuth>(sa => sa.Identifier == UserName && sa.Certificate == PassWord && sa.Type == LoginType && sa.Status == 0);
                 if (UserLoginAuth == null)
-                    return new JsonReturn<dynamic> { Status = ResultStatus.Failed, Msg = "用户名或密码错误！" };
+                    return new JsonReturn<dynamic> { Status = ResultStatus.NotMeetRequirement, Msg = "用户名或密码错误！" };
                 Sys_User User = _commonService.Get<Sys_User>(UserLoginAuth.UserID);
                 if (User == null)
-                    return new JsonReturn<dynamic> { Status = ResultStatus.Failed, Msg = "您的信息异常，请联系客服！" };
+                    return new JsonReturn<dynamic> { Status = ResultStatus.NotMeetRequirement, Msg = "您的帐号信息异常，请联系客服！" };
                 if (User.Status == (int)UserStatusEnum.Ban)
-                    return new JsonReturn<dynamic> { Status = ResultStatus.Failed, Msg = "您的账号已被封禁！" };
+                    return new JsonReturn<dynamic> { Status = ResultStatus.NotMeetRequirement, Msg = "您的账号已被封禁！" };
                 if (User.Status == (int)UserStatusEnum.Delete)
-                    return new JsonReturn<dynamic> { Status = ResultStatus.Failed, Msg = "您的账号已被删除！" };
+                    return new JsonReturn<dynamic> { Status = ResultStatus.NotMeetRequirement, Msg = "您的账号已被删除！" };
                 JwtToken token = new JwtTokenBuilder()
                                     .AddSecurityKey(JwtSecurityKey.Create(ConfigHelper.GetAppConfig("Authorization:SecretKey")))
                                     .AddSubject(ConfigHelper.GetAppConfig("Authorization:Subject"))
@@ -59,9 +61,10 @@ namespace Template.API.Controllers
                                     .AddClaim("UserID", User.ID.ToString())
                                     .AddClaim("UserName", User.NickName)
                                     .AddExpiry(Convert.ToInt32(ConfigHelper.GetAppConfig("Authorization:Expiry")))
-                                    .Build(); 
+                                    .Build();
                 User.Token = token.Value;
                 var result = new { User };
+                //await Task.CompletedTask;
                 return new JsonReturn<dynamic> { Status = ResultStatus.OK, Data = result };
             }
             catch (Exception ex)

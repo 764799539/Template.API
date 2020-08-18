@@ -17,5 +17,10 @@ namespace Template.Model
         /// 权限ID
         /// </summary>
         public long AuthID { get; set; }
+
+        /// <summary>
+        /// 权限
+        /// </summary>
+        public Sys_Auth Auth { get; set; }
     }
 }
