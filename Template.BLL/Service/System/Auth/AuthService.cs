@@ -10,36 +10,31 @@ namespace Template.BLL
         /// <summary>
         /// 获取权限列表
         /// </summary>
-        /// <param name="pagingParam">分页参数</param>
-        /// <param name="sortingParam">排序参数</param>
+        /// <param name="searchParam">查询参数</param>
         /// <returns></returns>
-        public PagedData<Sys_Auth> GetAuthList(AuthSearchParam searchParam, PagingParam pagingParam, SortingParam sortingParam)
+        public PagedData<Sys_Auth> GetAuthList(AuthSearchParam searchParam)
         {
-            return ReadDbContext.Query<Sys_Auth>(sa => sa.IsDelete == false && sa.Name.Contains(searchParam.Name) && sa.Describe.Contains(searchParam.Describe)).TakePageData(pagingParam, sortingParam);
+            return ReadDbContext.Query<Sys_Auth>(sa => sa.IsDelete == false && sa.Name.Contains(searchParam.Name) && sa.Describe.Contains(searchParam.Describe)).TakePageData(searchParam);
         }
 
         /// <summary>
         /// 获取角色列表
         /// </summary>
         /// <param name="searchParam">查询参数</param>
-        /// <param name="pagingParam">分页参数</param>
-        /// <param name="sortingParam">排序参数</param>
         /// <returns></returns>
-        public PagedData<Sys_Role> GetRoleList(RoleSearchParam searchParam, PagingParam pagingParam, SortingParam sortingParam)
+        public PagedData<Sys_Role> GetRoleList(RoleSearchParam searchParam)
         {
-            return ReadDbContext.Query<Sys_Role>(sa => sa.IsDelete == false && sa.Name.Contains(searchParam.Name) && sa.Describe.Contains(searchParam.Describe)).TakePageData(pagingParam, sortingParam);
+            return ReadDbContext.Query<Sys_Role>(sa => sa.IsDelete == false && sa.Name.Contains(searchParam.Name) && sa.Describe.Contains(searchParam.Describe)).TakePageData(searchParam);
         }
 
         /// <summary>
         /// 获取角色列表
         /// </summary>
         /// <param name="searchParam"></param>
-        /// <param name="pagingParam"></param>
-        /// <param name="sortingParam"></param>
         /// <returns></returns>
-        public PagedData<Sys_Group> GetGroupList(GroupSearchParam searchParam, PagingParam pagingParam, SortingParam sortingParam)
+        public PagedData<Sys_Group> GetGroupList(GroupSearchParam searchParam)
         {
-            return ReadDbContext.Query<Sys_Group>(sa => sa.IsDelete == false && sa.Name.Contains(searchParam.Name) && sa.Describe.Contains(searchParam.Describe)).TakePageData(pagingParam, sortingParam);
+            return ReadDbContext.Query<Sys_Group>(sa => sa.IsDelete == false && sa.Name.Contains(searchParam.Name) && sa.Describe.Contains(searchParam.Describe)).TakePageData(searchParam);
         }
 
         /// <summary>

@@ -14,7 +14,7 @@ namespace Template.BLL
         /// <param name="pagingParam">分页参数</param>
         /// <param name="sortingParam">排序参数</param>
         /// <returns></returns>
-        PagedData<Sys_Auth> GetAuthList(AuthSearchParam searchParam, PagingParam pagingParam, SortingParam sortingParam);
+        PagedData<Sys_Auth> GetAuthList(AuthSearchParam searchParam);
         /// <summary>
         /// 获取角色列表
         /// </summary>
@@ -22,7 +22,7 @@ namespace Template.BLL
         /// <param name="pagingParam">分页参数</param>
         /// <param name="sortingParam">排序参数</param>
         /// <returns></returns>
-        PagedData<Sys_Role> GetRoleList(RoleSearchParam searchParam, PagingParam pagingParam, SortingParam sortingParam);
+        PagedData<Sys_Role> GetRoleList(RoleSearchParam searchParam);
         /// <summary>
         /// 获取角色列表
         /// </summary>
@@ -30,7 +30,7 @@ namespace Template.BLL
         /// <param name="pagingParam"></param>
         /// <param name="sortingParam"></param>
         /// <returns></returns>
-        PagedData<Sys_Group> GetGroupList(GroupSearchParam searchParam, PagingParam pagingParam, SortingParam sortingParam);
+        PagedData<Sys_Group> GetGroupList(GroupSearchParam searchParam);
         /// <summary>
         /// 获取角色权限列表
         /// </summary>

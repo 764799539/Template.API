@@ -17,7 +17,7 @@ namespace Template.BLL
         /// <typeparam name="TEntity">实体类</typeparam>
         /// <param name="entity">实体对象</param>
         /// <returns>实体对象</returns>
-        Task<TEntity> InsertAsync<TEntity>(TEntity entity) where TEntity : BaseEntity;
+        Task<TEntity> Insert<TEntity>(TEntity entity) where TEntity : BaseEntity;
 
         /// <summary>
         /// 批量插入
@@ -32,7 +32,7 @@ namespace Template.BLL
         /// <typeparam name="TEntity">实体类</typeparam>
         /// <param name="Predicate">Lambda条件</param>
         /// <returns>受影响行数</returns>
-        Task<int> DeleteAsync<TEntity>(Expression<Func<TEntity, bool>> Predicate) where TEntity : BaseEntity;
+        Task<int> Delete<TEntity>(Expression<Func<TEntity, bool>> Predicate) where TEntity : BaseEntity;
 
         /// <summary>
         /// 物理删除
@@ -40,7 +40,7 @@ namespace Template.BLL
         /// <typeparam name="TEntity">实体类</typeparam>
         /// <param name="entity">实体对象</param>
         /// <returns>受影响行数</returns>
-        Task<int> DeleteAsync<TEntity>(TEntity entity) where TEntity : BaseEntity;
+        Task<int> Delete<TEntity>(TEntity entity) where TEntity : BaseEntity;
 
         /// <summary>
         /// 物理删除
@@ -48,7 +48,7 @@ namespace Template.BLL
         /// <typeparam name="TEntity">实体类</typeparam>
         /// <param name="Key">主键值</param>
         /// <returns>受影响行数</returns>
-        Task<int> DeleteAsync<TEntity>(object Key) where TEntity : BaseEntity;
+        Task<int> Delete<TEntity>(object Key) where TEntity : BaseEntity;
 
         /// <summary>
         /// 更新实体
@@ -56,7 +56,7 @@ namespace Template.BLL
         /// <typeparam name="TEntity">实体类</typeparam>
         /// <param name="entity">实体对象</param>
         /// <returns>受影响行数</returns>
-        Task<int> UpdateAsync<TEntity>(TEntity entity) where TEntity : BaseEntity;
+        Task<int> Update<TEntity>(TEntity entity) where TEntity : BaseEntity;
 
         /// <summary>
         /// 指定字段、条件更新实体
@@ -65,7 +65,7 @@ namespace Template.BLL
         /// <param name="Predicate">Lambda条件</param>
         /// <param name="Content">更新内容</param>
         /// <returns>受影响行数</returns>
-        Task<int> UpdateAsync<TEntity>(Expression<Func<TEntity, bool>> Predicate, Expression<Func<TEntity, TEntity>> content) where TEntity : BaseEntity;
+        Task<int> Update<TEntity>(Expression<Func<TEntity, bool>> Predicate, Expression<Func<TEntity, TEntity>> content) where TEntity : BaseEntity;
 
         /// <summary>
         /// 获取实体对象
@@ -73,7 +73,7 @@ namespace Template.BLL
         /// <typeparam name="TEntity">实体类</typeparam>
         /// <param name="Key">主键值</param>0
         /// <returns>实体对象</returns>
-        TEntity Get<TEntity>(object Key) where TEntity : BaseEntity;
+        Task<TEntity> Get<TEntity>(object Key) where TEntity : BaseEntity;
 
         /// <summary>
         /// 获取实体对象
@@ -81,7 +81,7 @@ namespace Template.BLL
         /// <typeparam name="TEntity">实体类</typeparam>
         /// <param name="Predicate">Lambda条件</param>
         /// <returns>实体对象</returns>
-        TEntity Get<TEntity>(Expression<Func<TEntity, bool>> Predicate) where TEntity : BaseEntity;
+        Task<TEntity> Get<TEntity>(Expression<Func<TEntity, bool>> Predicate) where TEntity : BaseEntity;
 
         /// <summary>
         /// 通过写库获取实体对象
@@ -89,7 +89,7 @@ namespace Template.BLL
         /// <typeparam name="TEntity">实体类</typeparam>
         /// <param name="Key">主键值</param>
         /// <returns>实体对象</returns>
-        TEntity GetByWrite<TEntity>(object Key) where TEntity : BaseEntity;
+        Task<TEntity> GetByWrite<TEntity>(object Key) where TEntity : BaseEntity;
 
         /// <summary>
         /// 通过写库获取实体对象
@@ -97,7 +97,7 @@ namespace Template.BLL
         /// <typeparam name="TEntity">实体类</typeparam>
         /// <param name="Predicate">Lambda条件</param>
         /// <returns>实体对象</returns>
-        TEntity GetByWrite<TEntity>(Expression<Func<TEntity, bool>> Predicate) where TEntity : BaseEntity;
+        Task<TEntity> GetByWrite<TEntity>(Expression<Func<TEntity, bool>> Predicate) where TEntity : BaseEntity;
 
         /// <summary>
         /// 获取数量
@@ -105,7 +105,7 @@ namespace Template.BLL
         /// <typeparam name="TEntity">实体类</typeparam>
         /// <param name="Predicate">Lambda条件</param>
         /// <returns>数量</returns>
-        int GetCount<TEntity>(Expression<Func<TEntity, bool>> Predicate) where TEntity : BaseEntity;
+        Task<int> GetCount<TEntity>(Expression<Func<TEntity, bool>> Predicate) where TEntity : BaseEntity;
 
         /// <summary>
         /// 通过写库获取数量
@@ -113,7 +113,7 @@ namespace Template.BLL
         /// <typeparam name="TEntity">实体类</typeparam>
         /// <param name="Predicate">Lambda条件</param>
         /// <returns>数量</returns>
-        int GetCountByWrite<TEntity>(Expression<Func<TEntity, bool>> Predicate) where TEntity : BaseEntity;
+        Task<int> GetCountByWrite<TEntity>(Expression<Func<TEntity, bool>> Predicate) where TEntity : BaseEntity;
 
         /// <summary>
         /// 判断是否存在
@@ -121,7 +121,7 @@ namespace Template.BLL
         /// <typeparam name="TEntity">实体类</typeparam>
         /// <param name="Predicate">Lambda条件</param>
         /// <returns>是否存在</returns>
-        bool IsExist<TEntity>(Expression<Func<TEntity, bool>> Predicate) where TEntity : BaseEntity;
+        Task<bool> IsExist<TEntity>(Expression<Func<TEntity, bool>> Predicate) where TEntity : BaseEntity;
 
         /// <summary>
         /// 通过写库判断是否存在
@@ -129,14 +129,14 @@ namespace Template.BLL
         /// <typeparam name="TEntity">实体类</typeparam>
         /// <param name="Predicate">Lambda条件</param>
         /// <returns>是否存在</returns>
-        bool IsExistByWrite<TEntity>(Expression<Func<TEntity, bool>> Predicate) where TEntity : BaseEntity;
+        Task<bool> IsExistByWrite<TEntity>(Expression<Func<TEntity, bool>> Predicate) where TEntity : BaseEntity;
 
         /// <summary>
         /// 获取实体列表
         /// </summary>
         /// <typeparam name="TEntity">实体</typeparam>
         /// <returns>实体对象列表</returns>
-        List<TEntity> GetList<TEntity>() where TEntity : BaseEntity;
+        Task<List<TEntity>> GetList<TEntity>() where TEntity : BaseEntity;
 
         /// <summary>
         /// 获取实体列表
@@ -144,7 +144,7 @@ namespace Template.BLL
         /// <typeparam name="TEntity">实体</typeparam>
         /// <param name="Predicate">Lambda条件</param>
         /// <returns>实体对象列表</returns>
-        List<TEntity> GetList<TEntity>(Expression<Func<TEntity, bool>> Predicate) where TEntity : BaseEntity;
+        Task<List<TEntity>> GetList<TEntity>(Expression<Func<TEntity, bool>> Predicate) where TEntity : BaseEntity;
 
         ///// <summary>
         ///// 软删除

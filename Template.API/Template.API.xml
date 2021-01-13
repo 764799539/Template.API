@@ -140,6 +140,26 @@
             <param name="basedOnLeft">当长度异常时，是否显示左边;<code>true</code>显示左边，<code>false</code>显示右边</param>
             <returns></returns>
         </member>
+        <member name="T:Template.API.Common.Middleware.TestMiddleware">
+            <summary>
+            约定中间件模式的中间件类
+            </summary>
+        </member>
+        <member name="M:Template.API.Common.Middleware.TestMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,System.String,System.Boolean)">
+            <summary>
+            约定构造，也需要在Configure方法内使用UseMiddleware注册，传入非依赖注入可注入的其他参数
+            </summary>
+            <param name="next">必须参数</param>
+            <param name="context">可选</param>
+            <param name="isToNext">可选</param>
+        </member>
+        <member name="M:Template.API.Common.Middleware.TestMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            约定方法
+            </summary>
+            <param name="HttpContext">必须参数</param>
+            <returns></returns>
+        </member>
         <member name="T:Template.API.Controllers.BaseController">
             <summary>
             自定义控制器基类
@@ -189,7 +209,7 @@
             <param name="ID">权限ID</param>
             <returns></returns>
         </member>
-        <member name="M:Template.API.Controllers.AuthController.GetAuthList(Template.Model.AuthSearchParam,Template.NuGet.PagingParam,Template.NuGet.SortingParam)">
+        <member name="M:Template.API.Controllers.AuthController.GetAuthList(Template.Model.AuthSearchParam)">
             <summary>
             获取权限列表
             </summary>
@@ -212,7 +232,7 @@
             <param name="ID">角色ID</param>
             <returns></returns>
         </member>
-        <member name="M:Template.API.Controllers.AuthController.GetRoleList(Template.Model.RoleSearchParam,Template.NuGet.PagingParam,Template.NuGet.SortingParam)">
+        <member name="M:Template.API.Controllers.AuthController.GetRoleList(Template.Model.RoleSearchParam)">
             <summary>
             获取角色列表
             </summary>
@@ -230,14 +250,14 @@
         </member>
         <member name="M:Template.API.Controllers.AuthController.DeleteGroup(System.Int64)">
             <summary>
-            删除角色
+            删除组
             </summary>
             <param name="ID">组ID</param>
             <returns></returns>
         </member>
-        <member name="M:Template.API.Controllers.AuthController.GetGroupList(Template.Model.GroupSearchParam,Template.NuGet.PagingParam,Template.NuGet.SortingParam)">
+        <member name="M:Template.API.Controllers.AuthController.GetGroupList(Template.Model.GroupSearchParam)">
             <summary>
-            获取角色列表
+            获取组列表
             </summary>
             <param name="searchParam"></param>
             <param name="pagingParam"></param>
@@ -402,6 +422,7 @@
         <member name="M:Template.API.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
             <summary>
             此方法由Runtime调用。使用此方法配置HTTP请求管道
+            1、这里的配置对所有请求生效
             </summary>
             <param name="app"></param>
             <param name="env"></param>

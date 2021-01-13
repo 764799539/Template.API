@@ -42,6 +42,7 @@ namespace Template.API
         /// <param name="services">依赖注入容器</param>
         public void ConfigureServices(IServiceCollection services)
         {
+            // 瞬时模式AddTransient
             // 如services.AddTransient<IFoo, Foo>();向容器中注入接口和实现[依赖注入(DI)]
             services.AddControllers();
             services.AddTransient<IUserService, UserService>();
@@ -61,6 +62,7 @@ namespace Template.API
                             // 是否验证发行人
                             ValidateIssuer = true,
                             // 是否验证接收人
+
                             ValidateAudience = true,
                             // 是否验证 超时?
                             ValidateLifetime = true,
@@ -143,13 +145,17 @@ namespace Template.API
 
         /// <summary>
         /// 此方法由Runtime调用。使用此方法配置HTTP请求管道
+        /// 1、这里的配置对所有请求生效
         /// </summary>
+        /// 
         /// <param name="app"></param>
         /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // 判断当前环境是否为开发模式
             if (env.IsDevelopment())
             {
+                // 注册一个开发模式异常页面
                 app.UseDeveloperExceptionPage();
             }
 
@@ -159,10 +165,13 @@ namespace Template.API
             // 调用HTTPS重定向中间件, 所有HTTP请求转换为HTTPS
             //app.UseHttpsRedirection();
 
+            // 路由中间件
             app.UseRouting();
 
+            // 认证中间件
             app.UseAuthorization();
 
+            // 终端中间件 和路由中间件是一套东西
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
@@ -171,12 +180,14 @@ namespace Template.API
 
             // 启用中间件为生成的 JSON 文档
             app.UseSwagger();
-
+            
             // 为SwaggerUI提供服务
             app.UseSwaggerUI(Swagger =>
             {
                 Swagger.SwaggerEndpoint("/swagger/v1/swagger.json", "Template.API V1");
             });
+
+            // IApplicationBuilder一定有一个地方去调用build方法，得到Application
 
         }
     }

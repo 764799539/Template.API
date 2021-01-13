@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Template.NuGet;
 
 namespace Template.Model
 {
     /// <summary>
     /// 组查询参数
     /// </summary>
-    public class GroupSearchParam
+    public class GroupSearchParam : PagingAndSortingParam
     {
         /// <summary>
         /// 名称

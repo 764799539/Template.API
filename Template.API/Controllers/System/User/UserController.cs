@@ -43,10 +43,10 @@ namespace Template.API.Controllers
                     return new JsonReturn<dynamic> { Status = ResultStatus.NotMeetRequirement, Msg = "用户名不能为空！" };
                 if (string.IsNullOrEmpty(PassWord))
                     return new JsonReturn<dynamic> { Status = ResultStatus.NotMeetRequirement, Msg = "密码不能为空！" };
-                Sys_User_LoginAuth UserLoginAuth = _commonService.Get<Sys_User_LoginAuth>(sa => sa.Identifier == UserName && sa.Certificate == PassWord && sa.Type == LoginType && sa.Status == 0);
+                Sys_User_LoginAuth UserLoginAuth = await _commonService.Get<Sys_User_LoginAuth>(sa => sa.Identifier == UserName && sa.Certificate == PassWord && sa.Type == LoginType && sa.Status == 0);
                 if (UserLoginAuth == null)
                     return new JsonReturn<dynamic> { Status = ResultStatus.NotMeetRequirement, Msg = "用户名或密码错误！" };
-                Sys_User User = _commonService.Get<Sys_User>(UserLoginAuth.UserID);
+                Sys_User User = await _commonService.Get<Sys_User>(UserLoginAuth.UserID);
                 if (User == null)
                     return new JsonReturn<dynamic> { Status = ResultStatus.NotMeetRequirement, Msg = "您的帐号信息异常，请联系客服！" };
                 if (User.Status == (int)UserStatusEnum.Ban)

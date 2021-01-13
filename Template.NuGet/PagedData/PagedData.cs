@@ -11,7 +11,7 @@ namespace Template.NuGet
         {
         }
 
-        public PagedData(PagingParam paging) : this(paging.Page, paging.PageSize)
+        public PagedData(PagingAndSortingParam paging) : this(paging.Page, paging.PageSize)
         {
         }
 
@@ -72,7 +72,7 @@ namespace Template.NuGet
         {
         }
 
-        public PagedData(PagingParam paging) : base(paging)
+        public PagedData(PagingAndSortingParam paging) : base(paging)
         {
         }
 

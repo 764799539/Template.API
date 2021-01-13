@@ -8,12 +8,12 @@ namespace Template.NuGet
 {
     public static class ChloeQueryExtension
     {
-		public static PagedData<T> TakePageData<T>(this IQuery<T> query, PagingParam pagingParam, SortingParam sortingParam = null)
+		public static PagedData<T> TakePageData<T>(this IQuery<T> query, PagingAndSortingParam PagingAndSortingParam)
 		{
-			if (sortingParam != null && !sortingParam.SortString.IsNullOrEmpty())
-				query.OrderBy(sortingParam.SortString);
-			PagedData<T> PageData = pagingParam.ToPagedData<T>();
-			PageData.DataList = query.TakePage(pagingParam.Page, pagingParam.PageSize).ToList();
+			if (PagingAndSortingParam != null && !PagingAndSortingParam.SortString.IsNullOrEmpty())
+				query.OrderBy(PagingAndSortingParam.SortString);
+			PagedData<T> PageData = PagingAndSortingParam.ToPagedData<T>();
+			PageData.DataList = query.TakePage(PagingAndSortingParam.Page, PagingAndSortingParam.PageSize).ToList();
 			PageData.TotalCount = query.Count();
 			return PageData;
 		}

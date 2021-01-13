@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Template.BLL;
 using Template.Model;
 using Template.NuGet;
@@ -18,7 +19,6 @@ namespace Template.API.Controllers
         private readonly IUserService _userService;
         private readonly ICommonService _commonService;
         private readonly IAuthService _authService;
-
         /// <summary>
         /// 授权服务注入
         /// </summary>
@@ -40,22 +40,22 @@ namespace Template.API.Controllers
         /// <returns></returns>
         [HttpPost, Route("SaveAuth")]
         [Authorization("Auth_Save")]
-        public JsonReturn<bool> SaveAuth(Sys_Auth entity)
+        public async Task<JsonReturn<bool>> SaveAuth(Sys_Auth entity)
         {
             if (entity.ID <= 0)
             {
-                if (!_commonService.IsExist<Sys_Auth>(sa => sa.Name == entity.Name && !sa.IsDelete))
+                if (!await _commonService.IsExist<Sys_Auth>(sa => sa.Name == entity.Name && !sa.IsDelete))
                 {
                     entity.CreateBy = AuthManager.UserID;
                     entity.CreateDate = DateTime.Now;
-                    _commonService.Insert(entity);
+                    await _commonService.Insert(entity);
                 }
             }
             else
             {
-                if (!_commonService.IsExist<Sys_Auth>(sa => sa.Name == entity.Name && !sa.IsDelete))
+                if (!await _commonService.IsExist<Sys_Auth>(sa => sa.Name == entity.Name && !sa.IsDelete))
                 {
-                    _commonService.Update<Sys_Auth>(sa => sa.ID == entity.ID, sa => new Sys_Auth()
+                    await _commonService.Update<Sys_Auth>(sa => sa.ID == entity.ID, sa => new Sys_Auth()
                     {
                         UpdateBy = AuthManager.UserID,
                         UpdateDate = DateTime.Now,
@@ -76,22 +76,21 @@ namespace Template.API.Controllers
         /// <returns></returns>
         [HttpPost, Route("DeleteAuth")]
         [Authorization("Auth_Del")]
-        public JsonReturn<bool> DeleteAuth(long ID)
+        public async Task<JsonReturn<bool>> DeleteAuth(long ID)
         {
-            return new JsonReturn<bool> { Status = ResultStatus.OK, Data = _commonService.Update<Sys_Auth>(sa => sa.ID == ID, sa => new Sys_Auth() { IsDelete = true }) == 1, Msg = ""};
+            return new JsonReturn<bool> { Status = ResultStatus.OK, Data = await _commonService.Update<Sys_Auth>(sa => sa.ID == ID, sa => new Sys_Auth() { IsDelete = true }) == 1, Msg = ""};
         }
 
         /// <summary>
         /// 获取权限列表
         /// </summary>
         /// <param name="searchParam">查询参数</param>
-        /// <param name="pagingParam">分页参数</param>
-        /// <param name="sortingParam">排序参数</param>
         /// <returns></returns>
-        [HttpPost, Route("GetAuthList")]
+        [Route("GetAuthList")]
         [Authorization("Auth_Search")]
-        public JsonReturn<PagedData<Sys_Auth>> GetAuthList(AuthSearchParam searchParam,PagingParam pagingParam, SortingParam sortingParam) {
-            return new JsonReturn<PagedData<Sys_Auth>> { Status = ResultStatus.OK, Data = _authService.GetAuthList(searchParam, pagingParam, sortingParam), Msg = "" };
+        public JsonReturn<PagedData<Sys_Auth>> GetAuthList(AuthSearchParam searchParam)
+        {
+            return new JsonReturn<PagedData<Sys_Auth>> { Status = ResultStatus.OK, Data = _authService.GetAuthList(searchParam), Msg = "" };
         }
         #endregion
 
@@ -103,22 +102,22 @@ namespace Template.API.Controllers
         /// <returns></returns>
         [HttpPost, Route("SaveRole")]
         [Authorization("Role_Save")]
-        public JsonReturn<bool> SaveRole(Sys_Role entity)
+        public async Task<JsonReturn<bool>> SaveRole(Sys_Role entity)
         {
             if (entity.ID <= 0)
             {
-                if (!_commonService.IsExist<Sys_Role>(sa => sa.Name == entity.Name && !sa.IsDelete))
+                if (!await _commonService.IsExist<Sys_Role>(sa => sa.Name == entity.Name && !sa.IsDelete))
                 {
                     entity.CreateBy = AuthManager.UserID;
                     entity.CreateDate = DateTime.Now;
-                    _commonService.Insert(entity);
+                    await _commonService.Insert(entity);
                 }
             }
             else
             {
-                if (!_commonService.IsExist<Sys_Role>(sa => sa.Name == entity.Name && !sa.IsDelete))
+                if (!await _commonService.IsExist<Sys_Role>(sa => sa.Name == entity.Name && !sa.IsDelete))
                 {
-                    _commonService.Update<Sys_Role>(sa => sa.ID == entity.ID, sa => new Sys_Role()
+                    await _commonService.Update<Sys_Role>(sa => sa.ID == entity.ID, sa => new Sys_Role()
                     {
                         UpdateBy = AuthManager.UserID,
                         UpdateDate = DateTime.Now,
@@ -138,9 +137,9 @@ namespace Template.API.Controllers
         /// <returns></returns>
         [HttpPost, Route("DeleteRole")]
         [Authorization("Role_Del")]
-        public JsonReturn<bool> DeleteRole(long ID)
+        public async Task<JsonReturn<bool>> DeleteRole(long ID)
         {
-            return new JsonReturn<bool> { Status = ResultStatus.OK, Data = _commonService.Update<Sys_Role>(sa => sa.ID == ID, sa => new Sys_Role() { IsDelete = true }) == 1, Msg = "" };
+            return new JsonReturn<bool> { Status = ResultStatus.OK, Data = await _commonService.Update<Sys_Role>(sa => sa.ID == ID, sa => new Sys_Role() { IsDelete = true }) == 1, Msg = "" };
         }
 
 
@@ -148,14 +147,12 @@ namespace Template.API.Controllers
         /// 获取角色列表
         /// </summary>
         /// <param name="searchParam">查询参数</param>
-        /// <param name="pagingParam">分页参数</param>
-        /// <param name="sortingParam">排序参数</param>
         /// <returns></returns>
         [HttpPost, Route("GetRoleList")]
         [Authorization("Role_Search")]
-        public JsonReturn<PagedData<Sys_Role>> GetRoleList(RoleSearchParam searchParam, PagingParam pagingParam, SortingParam sortingParam)
+        public JsonReturn<PagedData<Sys_Role>> GetRoleList(RoleSearchParam searchParam)
         {
-            return new JsonReturn<PagedData<Sys_Role>> { Status = ResultStatus.OK, Data = _authService.GetRoleList(searchParam, pagingParam, sortingParam), Msg = "" };
+            return new JsonReturn<PagedData<Sys_Role>> { Status = ResultStatus.OK, Data = _authService.GetRoleList(searchParam), Msg = "" };
         }
         #endregion
 
@@ -167,22 +164,22 @@ namespace Template.API.Controllers
         /// <returns></returns>
         [HttpPost, Route("SaveGroup")]
         [Authorization("Group_Save")]
-        public JsonReturn<bool> SaveGroup(Sys_Group entity)
+        public async Task<JsonReturn<bool>> SaveGroup(Sys_Group entity)
         {
             if (entity.ID <= 0)
             {
-                if (!_commonService.IsExist<Sys_Group>(sa => sa.Name == entity.Name && !sa.IsDelete))
+                if (!await _commonService.IsExist<Sys_Group>(sa => sa.Name == entity.Name && !sa.IsDelete))
                 {
                     entity.CreateBy = AuthManager.UserID;
                     entity.CreateDate = DateTime.Now;
-                    _commonService.Insert(entity);
+                    await _commonService.Insert(entity);
                 }
             }
             else
             {
-                if (!_commonService.IsExist<Sys_Group>(sa => sa.Name == entity.Name && !sa.IsDelete))
+                if (!await _commonService.IsExist<Sys_Group>(sa => sa.Name == entity.Name && !sa.IsDelete))
                 {
-                    _commonService.Update<Sys_Group>(sa => sa.ID == entity.ID, sa => new Sys_Group()
+                    await _commonService.Update<Sys_Group>(sa => sa.ID == entity.ID, sa => new Sys_Group()
                     {
                         UpdateBy = AuthManager.UserID,
                         UpdateDate = DateTime.Now,
@@ -196,29 +193,27 @@ namespace Template.API.Controllers
         }
 
         /// <summary>
-        /// 删除角色
+        /// 删除组
         /// </summary>
         /// <param name="ID">组ID</param>
         /// <returns></returns>
         [HttpPost, Route("DeleteGroup")]
         [Authorization("Group_Del")]
-        public JsonReturn<bool> DeleteGroup(long ID)
+        public async Task<JsonReturn<bool>> DeleteGroup(long ID)
         {
-            return new JsonReturn<bool> { Status = ResultStatus.OK, Data = _commonService.Update<Sys_Group>(sa => sa.ID == ID, sa => new Sys_Group() { IsDelete = true }) == 1, Msg = "" };
+            return new JsonReturn<bool> { Status = ResultStatus.OK, Data = await _commonService.Update<Sys_Group>(sa => sa.ID == ID, sa => new Sys_Group() { IsDelete = true }) == 1, Msg = "" };
         }
 
         /// <summary>
-        /// 获取角色列表
+        /// 获取组列表
         /// </summary>
         /// <param name="searchParam"></param>
-        /// <param name="pagingParam"></param>
-        /// <param name="sortingParam"></param>
         /// <returns></returns>
         [HttpPost, Route("GetGroupList")]
         [Authorization("Group_Search")]
-        public JsonReturn<PagedData<Sys_Group>> GetGroupList(GroupSearchParam searchParam, PagingParam pagingParam, SortingParam sortingParam)
+        public JsonReturn<PagedData<Sys_Group>> GetGroupList(GroupSearchParam searchParam)
         {
-            return new JsonReturn<PagedData<Sys_Group>> { Status = ResultStatus.OK, Data = _authService.GetGroupList(searchParam, pagingParam, sortingParam), Msg = "" };
+            return new JsonReturn<PagedData<Sys_Group>> { Status = ResultStatus.OK, Data = _authService.GetGroupList(searchParam), Msg = "" };
         }
         #endregion
 
@@ -231,9 +226,9 @@ namespace Template.API.Controllers
         /// <returns></returns>
         [HttpPost, Route("SaveUserRole")]
         [Authorization("UserRole_Save")]
-        public JsonReturn<bool> SaveUserRole(long UserID,long RoleID)
+        public async Task<JsonReturn<bool>> SaveUserRole(long UserID,long RoleID)
         {
-            if (_commonService.GetCount<Sys_UserRole>(sa =>sa.UserID == UserID && sa.RoleID == RoleID && sa.IsDelete == false) > 0)
+            if (await _commonService.GetCount<Sys_UserRole>(sa =>sa.UserID == UserID && sa.RoleID == RoleID && sa.IsDelete == false) > 0)
                 return new JsonReturn<bool> { Status = ResultStatus.NotMeetRequirement, Data = true };
             return new JsonReturn<bool> { Status = ResultStatus.OK, Data = true };
         }
@@ -291,6 +286,7 @@ namespace Template.API.Controllers
         {
             return new JsonReturn<List<Sys_Auth>> { Status = ResultStatus.OK, Data = _authService.GetGroupAuthList(GroupID, Type), Msg = "" };
         }
+
         /// <summary>
         /// 保存组权限
         /// </summary>
