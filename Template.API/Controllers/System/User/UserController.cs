@@ -43,16 +43,16 @@ namespace Template.API.Controllers
                     return new JsonReturn<dynamic> { Status = ResultStatus.NotMeetRequirement, Msg = "用户名不能为空！" };
                 if (string.IsNullOrEmpty(PassWord))
                     return new JsonReturn<dynamic> { Status = ResultStatus.NotMeetRequirement, Msg = "密码不能为空！" };
-                Sys_User_LoginAuth UserLoginAuth = await _commonService.Get<Sys_User_LoginAuth>(sa => sa.Identifier == UserName && sa.Certificate == PassWord && sa.Type == LoginType && sa.Status == 0);
+                Sys_User_LoginAuth UserLoginAuth = await _commonService.Get<Sys_User_LoginAuth>(sa => sa.Identifier == UserName && sa.Certificate == PassWord && sa.Type == LoginType);
                 if (UserLoginAuth == null)
                     return new JsonReturn<dynamic> { Status = ResultStatus.NotMeetRequirement, Msg = "用户名或密码错误！" };
                 Sys_User User = await _commonService.Get<Sys_User>(UserLoginAuth.UserID);
                 if (User == null)
                     return new JsonReturn<dynamic> { Status = ResultStatus.NotMeetRequirement, Msg = "您的帐号信息异常，请联系客服！" };
-                if (User.Status == (int)UserStatusEnum.Ban)
-                    return new JsonReturn<dynamic> { Status = ResultStatus.NotMeetRequirement, Msg = "您的账号已被封禁！" };
-                if (User.Status == (int)UserStatusEnum.Delete)
-                    return new JsonReturn<dynamic> { Status = ResultStatus.NotMeetRequirement, Msg = "您的账号已被删除！" };
+                //if (User.Status == (int)UserStatusEnum.Ban)
+                //    return new JsonReturn<dynamic> { Status = ResultStatus.NotMeetRequirement, Msg = "您的账号已被封禁！" };
+                //if (User.Status == (int)UserStatusEnum.Delete)
+                //    return new JsonReturn<dynamic> { Status = ResultStatus.NotMeetRequirement, Msg = "您的账号已被删除！" };
                 JwtToken token = new JwtTokenBuilder()
                                     .AddSecurityKey(JwtSecurityKey.Create(ConfigHelper.GetAppConfig("Authorization:SecretKey")))
                                     .AddSubject(ConfigHelper.GetAppConfig("Authorization:Subject"))

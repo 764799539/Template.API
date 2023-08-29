@@ -19,19 +19,9 @@ namespace Template.Model
         public long ID { get; set; }
 
         /// <summary>
-        /// 状态
-        /// </summary>
-        public int Status { get; set; }
-
-        /// <summary>
         /// 是否删除
         /// </summary>
         public bool IsDelete { get; set; }
-
-        /// <summary>
-        /// 乐观锁
-        /// </summary>
-        public int? Revision { get; set; }
 
         /// <summary>
         /// 创建人
